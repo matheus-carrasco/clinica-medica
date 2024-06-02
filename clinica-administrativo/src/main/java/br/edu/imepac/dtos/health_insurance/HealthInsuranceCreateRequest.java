@@ -7,5 +7,5 @@ public class HealthInsuranceCreateRequest {
 
     private String name;
     private String cnpj;
-    private String telefone;
+    private String phone;
 }

@@ -17,5 +17,5 @@ public class HealthInsuranceModel {
     private Long id;
     private String name;
     private String cnpj;
-    private String telefone;
+    private String phone;
 }

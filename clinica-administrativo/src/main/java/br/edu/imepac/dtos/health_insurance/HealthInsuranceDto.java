@@ -13,12 +13,12 @@ public class HealthInsuranceDto {
     private Long id;
     private String name;
     private String cnpj;
-    private String telefone;
+    private String phone;
 
     public HealthInsuranceDto(HealthInsuranceModel model){
         this.id = model.getId();
         this.name = model.getName();
         this.cnpj = model.getCnpj();
-        this.telefone = model.getTelefone();
+        this.phone = model.getPhone();
     }
 }

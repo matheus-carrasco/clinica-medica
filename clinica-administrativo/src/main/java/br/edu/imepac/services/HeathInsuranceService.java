@@ -2,12 +2,8 @@ package br.edu.imepac.services;
 
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceCreateRequest;
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
-import br.edu.imepac.dtos.specialty.SpecialtyCreateRequest;
-import br.edu.imepac.dtos.specialty.SpecialtyDto;
 import br.edu.imepac.models.HealthInsuranceModel;
-import br.edu.imepac.models.SpecialtyModel;
 import br.edu.imepac.repositories.HealthInsurenceRepository;
-import br.edu.imepac.repositories.SpecialtyRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +40,7 @@ public class HeathInsuranceService {
         HealthInsuranceModel obj = findById(id);
         obj.setName(details.getName());
         obj.setCnpj(details.getCnpj());
-        obj.setTelefone(details.getTelefone());
+        obj.setPhone(details.getPhone());
 
         HealthInsuranceModel updated = repo.save(obj);
         HealthInsuranceDto updateDto = createDtoFromModel(updated);
@@ -57,8 +53,8 @@ public class HeathInsuranceService {
     public HealthInsuranceModel createModelFromRequest(HealthInsuranceCreateRequest request){
         HealthInsuranceModel obj = new HealthInsuranceModel();
         obj.setName(request.getName());
-        obj.setTelefone(request.getTelefone());
-        obj.setCnpj(request.getTelefone());
+        obj.setPhone(request.getPhone());
+        obj.setCnpj(request.getPhone());
         return obj;
     }
 
@@ -68,7 +64,7 @@ public class HeathInsuranceService {
         dto.setId(model.getId());
         dto.setName(model.getName());
         dto.setCnpj(model.getCnpj());
-        dto.setTelefone(model.getTelefone());
+        dto.setPhone(model.getPhone());
         return dto;
     }
 }
