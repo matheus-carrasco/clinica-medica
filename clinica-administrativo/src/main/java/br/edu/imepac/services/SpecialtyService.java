@@ -5,7 +5,7 @@ import br.edu.imepac.dtos.specialty.SpecialtyDto;
 import br.edu.imepac.models.SpecialtyModel;
 import br.edu.imepac.repositories.SpecialtyRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +13,13 @@ import java.util.Optional;
 
 @Service
 public class SpecialtyService {
-
-    @Autowired
     private SpecialtyRepository repo;
+    private ModelMapper modelMapper;
+
+    public SpecialtyService(SpecialtyRepository specialtyRepository, ModelMapper modelMapper) {
+        this.repo = specialtyRepository;
+        this.modelMapper = modelMapper;
+    }
 
     public List<SpecialtyModel> findAll(){
         return repo.findAll();
@@ -23,12 +27,13 @@ public class SpecialtyService {
 
     public SpecialtyModel findById(Long id){
         Optional<SpecialtyModel> obj = repo.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Specialty not found"));
     }
 
     public SpecialtyDto insert(SpecialtyCreateRequest request){
-        SpecialtyModel savedObj = repo.save(createModelFromRequest(request));
-        return createDtoFromModel(savedObj);
+        SpecialtyModel savedObj = modelMapper.map(request, SpecialtyModel.class);
+        repo.save(savedObj);
+        return modelMapper.map(savedObj, SpecialtyDto.class);
     }
 
     public void delete(Long id){
@@ -38,27 +43,8 @@ public class SpecialtyService {
 
     public SpecialtyDto update(Long id, SpecialtyDto details){
         SpecialtyModel obj = findById(id);
-        obj.setDescription(details.getDescription());
-
-        SpecialtyModel updated = repo.save(obj);
-        SpecialtyDto updateDto = createDtoFromModel(updated);
-        updateDto.setId(updated.getId());
-
-        return updateDto;
-    }
-
-    //auxiliar: cria um Model a partir de um Request
-    public SpecialtyModel createModelFromRequest(SpecialtyCreateRequest request){
-        SpecialtyModel obj = new SpecialtyModel();
-        obj.setDescription(request.getDescription());
-        return obj;
-    }
-
-    //auxiliar: Cria um DTO a partir de um Model
-    public SpecialtyDto createDtoFromModel(SpecialtyModel model){
-        SpecialtyDto dto = new SpecialtyDto();
-        dto.setId(model.getId());
-        dto.setDescription(model.getDescription());
-        return dto;
+        obj = modelMapper.map(details, SpecialtyModel.class);
+        repo.save(obj);
+        return modelMapper.map(obj, SpecialtyDto.class);
     }
 }

@@ -43,14 +43,21 @@ public class Instantiation implements CommandLineRunner {
         SpecialtyModel pediatra = new SpecialtyModel(null, "pediatra");
         SpecialtyModel oftalmologista = new SpecialtyModel(null, "oftalmologista");
         SpecialtyModel psiquiatra = new SpecialtyModel(null, "psiquiatra");
-        specialtyRepository.saveAll(Arrays.asList(  cardiologista, ginecologista, pediatra,oftalmologista, psiquiatra));
+        specialtyRepository.saveAll(Arrays.asList(  cardiologista, ginecologista, pediatra, oftalmologista, psiquiatra));
 
-        DoctorModel alex = new DoctorModel(null, "Alex dos Santos", "102345", "F7dK9sL3!");
-        DoctorModel maria = new DoctorModel(null, "Maria dos Santos", "204678", "mR8tY4n2");
-        DoctorModel joao = new DoctorModel(null, "Joao Costa", "308912", "W6xB1pQ7");
-        DoctorModel bruno = new DoctorModel(null, "Bruno Oliveira", "567890", "aP5wR3x8");
-        DoctorModel carla = new DoctorModel(null, "Carla Pereira", "678901", "bN2yU6q4");
+        DoctorModel alex = new DoctorModel(null, "Alex dos Santos", "102345", "F7dK9sL3!", cardiologista);
+        DoctorModel maria = new DoctorModel(null, "Maria dos Santos", "204678", "mR8tY4n2", ginecologista);
+        DoctorModel joao = new DoctorModel(null, "Joao Costa", "308912", "W6xB1pQ7",pediatra);
+        DoctorModel bruno = new DoctorModel(null, "Bruno Oliveira", "567890", "aP5wR3x8",oftalmologista);
+        DoctorModel carla = new DoctorModel(null, "Carla Pereira", "678901", "bN2yU6q4",psiquiatra);
         doctorRepository.saveAll(Arrays.asList(alex, maria, joao, bruno, carla));
+
+        cardiologista.setDoctors(Arrays.asList(alex));
+        ginecologista.setDoctors(Arrays.asList(maria));
+        pediatra.setDoctors(Arrays.asList(joao));
+        oftalmologista.setDoctors(Arrays.asList(bruno));
+        psiquiatra.setDoctors(Arrays.asList(carla));
+        specialtyRepository.saveAll(Arrays.asList(  cardiologista, ginecologista, pediatra, oftalmologista, psiquiatra));
 
         HealthInsuranceModel unimed = new HealthInsuranceModel(null, "Unimed", "02.812.468/0001-06","(34) 3239-6941");
         HealthInsuranceModel amil = new HealthInsuranceModel(null,"Amil", "29.309.127/0001-79", "(21) 3003-1333");

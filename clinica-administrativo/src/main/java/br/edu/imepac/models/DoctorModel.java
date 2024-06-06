@@ -1,5 +1,8 @@
 package br.edu.imepac.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +25,8 @@ public class DoctorModel implements Serializable {
     private String crm;
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "specialty_id", nullable = false)
+    @JsonBackReference
+    private SpecialtyModel specialty;
 }

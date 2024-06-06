@@ -51,46 +51,4 @@ public class DoctorController {
         DoctorDto updated = service.update(id, newDto);
         return ResponseEntity.noContent().build();
     }
-
-/*
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<DoctorDto> updateDoctor(@PathVariable Long id, @RequestBody DoctorDto medicoDetails) {
-        DoctorDto updatedMedico = doctorService.update(id, medicoDetails);
-        if (updatedMedico != null) {
-            return new ResponseEntity<>(updatedMedico, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PostMapping
-    public ResponseEntity<DoctorDto> saveDoctor(@RequestBody DoctorCreateRequest doctorCreateRequest) {
-        DoctorDto savedMedico = doctorService.save(doctorCreateRequest);
-        return new ResponseEntity<>(savedMedico, HttpStatus.CREATED);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<DoctorDto>> listAllDoctors() {
-        List<DoctorDto> medicos = doctorService.findAll();
-        return new ResponseEntity<>(medicos, HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<DoctorDto> getDoctorById(@PathVariable Long id) {
-        DoctorDto doctorDto = doctorService.findById(id);
-        if (doctorDto != null) {
-            return new ResponseEntity<>(doctorDto, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteDoctor(@PathVariable Long id) {
-        doctorService.delete(id);
-    }
-*/
 }
