@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Service
 public class SpecialtyService {
+
     private SpecialtyRepository repo;
     private ModelMapper modelMapper;
 
@@ -42,8 +43,8 @@ public class SpecialtyService {
     }
 
     public SpecialtyDto update(Long id, SpecialtyDto details){
-        SpecialtyModel obj = findById(id);
-        obj = modelMapper.map(details, SpecialtyModel.class);
+        findById(id);
+        SpecialtyModel obj = modelMapper.map(details, SpecialtyModel.class);
         repo.save(obj);
         return modelMapper.map(obj, SpecialtyDto.class);
     }

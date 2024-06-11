@@ -3,7 +3,7 @@ package br.edu.imepac.controllers;
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceCreateRequest;
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
 import br.edu.imepac.models.HealthInsuranceModel;
-import br.edu.imepac.services.HeathInsuranceService;
+import br.edu.imepac.services.HealthInsuranceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class HealthInsuranceController {
 
     @Autowired
-    private HeathInsuranceService service;
+    private HealthInsuranceService service;
 
     @GetMapping
     public ResponseEntity<List<HealthInsuranceDto>> findAll(){

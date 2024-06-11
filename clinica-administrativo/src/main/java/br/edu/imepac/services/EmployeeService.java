@@ -2,10 +2,11 @@ package br.edu.imepac.services;
 
 import br.edu.imepac.dtos.employees.EmployeeCreateRequest;
 import br.edu.imepac.dtos.employees.EmployeeDto;
+import br.edu.imepac.dtos.specialty.SpecialtyCreateRequest;
 import br.edu.imepac.models.EmployeeModel;
 import br.edu.imepac.repositories.EmployeeRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +15,13 @@ import java.util.Optional;
 @Service
 public class EmployeeService {
 
-    @Autowired
     private EmployeeRepository repo;
+    private ModelMapper modelMapper;
+
+    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper){
+        this.repo = employeeRepository;
+        this.modelMapper = modelMapper;
+    }
 
     public List<EmployeeModel> findAll(){
         return repo.findAll();
@@ -27,8 +33,9 @@ public class EmployeeService {
     }
 
     public EmployeeDto insert(EmployeeCreateRequest request){
-        EmployeeModel savedObj = repo.save(createModelFromRequest(request));
-        return createDtoFromModel(savedObj);
+        EmployeeModel savedObj = modelMapper.map(request, EmployeeModel.class);
+        repo.save(savedObj);
+        return modelMapper.map(savedObj, EmployeeDto.class);
     }
 
     public void delete(Long id){
@@ -37,47 +44,9 @@ public class EmployeeService {
     }
 
     public EmployeeDto update(Long id, EmployeeDto details){
-        EmployeeModel obj = findById(id);
-        obj.setName(details.getName());
-        obj.setAdress(details.getAdress());
-        obj.setCity(details.getCity());
-        obj.setState(details.getState());
-        obj.setPhone(details.getPhone());
-        obj.setDateOfBirth(details.getDateOfBirth());
-
-        EmployeeModel updated = repo.save(obj);
-        EmployeeDto updateDto = createDtoFromModel(updated);
-        updateDto.setId(updated.getId());
-
-        return updateDto;
-    }
-
-    //auxiliar: cria um Model a partir de um Request
-    public EmployeeModel createModelFromRequest(EmployeeCreateRequest request){
-        EmployeeModel obj = new EmployeeModel();
-        obj.setName(request.getName());
-        obj.setIdNumber(request.getIdNumber());
-        obj.setCpfNumber(request.getCpfNumber());
-        obj.setAdress(request.getAdress());
-        obj.setCity(request.getCity());
-        obj.setState(request.getState());
-        obj.setPhone(request.getPhone());
-        obj.setWorkPermitNumber(request.getWorkPermitNumber());
-        obj.setPisNumber(request.getPisNumber());
-        obj.setDateOfBirth(request.getDateOfBirth());
-        return obj;
-    }
-
-    //auxiliar: Cria um DTO a partir de um Model
-    public EmployeeDto createDtoFromModel(EmployeeModel model){
-        EmployeeDto dto = new EmployeeDto();
-        dto.setId(model.getId());
-        dto.setName(model.getName());
-        dto.setAdress(model.getAdress());
-        dto.setCity(model.getCity());
-        dto.setState(model.getState());
-        dto.setPhone(model.getPhone());
-        dto.setDateOfBirth(model.getDateOfBirth());
-        return dto;
+        findById(id);
+        EmployeeModel obj = modelMapper.map(details, EmployeeModel.class);
+        repo.save(obj);
+        return modelMapper.map(obj, EmployeeDto.class);
     }
 }

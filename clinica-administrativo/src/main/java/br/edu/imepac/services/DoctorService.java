@@ -52,8 +52,8 @@ public class DoctorService {
     }
 
     public DoctorDto update(Long id, DoctorDto details){
-        DoctorModel obj = findById(id);
-        obj = modelMapper.map(details, DoctorModel.class);
+        findById(id);
+        DoctorModel obj = modelMapper.map(details, DoctorModel.class);
         repo.save(obj);
         return modelMapper.map(obj, DoctorDto.class);
     }
