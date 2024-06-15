@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "doctors")
@@ -29,4 +30,6 @@ public class DoctorModel implements Serializable {
     @JoinColumn(name = "specialty_id", nullable = false)
     @JsonBackReference
     private SpecialtyModel specialty;
+
+
 }

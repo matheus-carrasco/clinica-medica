@@ -1,10 +1,8 @@
 package br.edu.imepac.services;
 
-import br.edu.imepac.dtos.health_insurance.HealthInsuranceCreateRequest;
-import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
-import br.edu.imepac.models.HealthInsuranceModel;
+import br.edu.imepac.dtos.PatientCreateRequest;
+import br.edu.imepac.dtos.PatientDto;
 import br.edu.imepac.models.PatientModel;
-import br.edu.imepac.repositories.HealthInsurenceRepository;
 import br.edu.imepac.repositories.PatientRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -33,10 +31,10 @@ public class PatientService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
     }
 
-    public HealthInsuranceDto insert(HealthInsuranceCreateRequest request){
-        HealthInsuranceModel savedObj = modelMapper.map(request, HealthInsuranceModel.class);
+    public PatientDto insert(PatientCreateRequest request){
+        PatientModel savedObj = modelMapper.map(request, PatientModel.class);
         repo.save(savedObj);
-        return modelMapper.map(savedObj, HealthInsuranceDto.class);
+        return modelMapper.map(savedObj, PatientDto.class);
     }
 
     public void delete(Long id){
@@ -44,10 +42,10 @@ public class PatientService {
         repo.deleteById(id);
     }
 
-    public HealthInsuranceDto update(Long id, HealthInsuranceDto details){
+    public PatientDto update(Long id, PatientDto details){
         findById(id);
-        HealthInsuranceModel obj = modelMapper.map(details, HealthInsuranceModel.class);
+        PatientModel obj = modelMapper.map(details, PatientModel.class);
         repo.save(obj);
-        return modelMapper.map(obj, HealthInsuranceDto.class);
+        return modelMapper.map(obj, PatientDto.class);
     }
 }

@@ -4,7 +4,6 @@ import br.edu.imepac.dtos.health_insurance.HealthInsuranceCreateRequest;
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
 import br.edu.imepac.models.HealthInsuranceModel;
 import br.edu.imepac.services.HealthInsuranceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,9 +16,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/healthinsurances")
 public class HealthInsuranceController {
 
-    @Autowired
     private HealthInsuranceService service;
 
+    public HealthInsuranceController(HealthInsuranceService service){
+        this.service = service;
+    }
     @GetMapping
     public ResponseEntity<List<HealthInsuranceDto>> findAll(){
         List<HealthInsuranceModel> list = service.findAll();
