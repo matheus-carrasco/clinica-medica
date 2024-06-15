@@ -2,8 +2,12 @@ package br.edu.imepac.controllers;
 
 import br.edu.imepac.dtos.patients.PatientCreateRequest;
 import br.edu.imepac.dtos.patients.PatientDto;
+import br.edu.imepac.dtos.schedules.ScheduleCreateRequest;
+import br.edu.imepac.dtos.schedules.ScheduleDto;
 import br.edu.imepac.models.PatientModel;
+import br.edu.imepac.models.ScheduleModel;
 import br.edu.imepac.services.PatientService;
+import br.edu.imepac.services.ScheduleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,31 +17,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/patients")
-public class PatientController {
+@RequestMapping("/schedules")
+public class ScheduleController {
 
-    private PatientService service;
+    private ScheduleService service;
 
-    public PatientController(PatientService service){
+    public ScheduleController(ScheduleService service){
         this.service = service;
     }
 
     @GetMapping
-    public ResponseEntity<List<PatientDto>> findAll(){
-        List<PatientModel> list = service.findAll();
-        List<PatientDto> listDto = list.stream().map(x -> new PatientDto(x)).collect(Collectors.toList());
+    public ResponseEntity<List<ScheduleDto>> findAll(){
+        List<ScheduleModel> list = service.findAll();
+        List<ScheduleDto> listDto = list.stream().map(x -> new ScheduleDto(x)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PatientDto> findById(@PathVariable Long id){
-        PatientModel obj = service.findById(id);
-        return ResponseEntity.ok().body(new PatientDto(obj));
+    public ResponseEntity<ScheduleDto> findById(@PathVariable Long id){
+        ScheduleModel obj = service.findById(id);
+        return ResponseEntity.ok().body(new ScheduleDto(obj));
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody PatientCreateRequest request){
-        PatientDto obj = service.insert(request);
+    public ResponseEntity<Void> insert(@RequestBody ScheduleCreateRequest request){
+        ScheduleDto obj = service.insert(request);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
@@ -49,8 +53,8 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PatientDto> update(@PathVariable Long id, @RequestBody PatientDto newDto){
-        PatientDto updated = service.update(id, newDto);
+    public ResponseEntity<ScheduleDto> update(@PathVariable Long id, @RequestBody ScheduleDto newDto){
+        ScheduleDto updated = service.update(id, newDto);
         return ResponseEntity.noContent().build();
     }
 }

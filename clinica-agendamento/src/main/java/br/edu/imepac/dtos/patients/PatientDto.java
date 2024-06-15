@@ -1,4 +1,4 @@
-package br.edu.imepac.dtos;
+package br.edu.imepac.dtos.patients;
 
 import br.edu.imepac.models.PatientModel;
 import lombok.AllArgsConstructor;
