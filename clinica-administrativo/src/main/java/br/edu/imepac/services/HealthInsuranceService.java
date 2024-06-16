@@ -6,6 +6,7 @@ import br.edu.imepac.models.HealthInsuranceModel;
 import br.edu.imepac.repositories.HealthInsurenceRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,11 @@ import java.util.Optional;
 @Service
 public class HealthInsuranceService {
 
+    @Autowired
     private HealthInsurenceRepository repo;
     private ModelMapper modelMapper;
 
-    public HealthInsuranceService(HealthInsurenceRepository healthInsurenceRepository, ModelMapper modelMapper){
-        this.repo = healthInsurenceRepository;
+    public HealthInsuranceService(ModelMapper modelMapper){
         this.modelMapper = modelMapper;
     }
 

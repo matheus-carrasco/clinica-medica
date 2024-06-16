@@ -6,6 +6,7 @@ import br.edu.imepac.models.SpecialtyModel;
 import br.edu.imepac.repositories.SpecialtyRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,11 @@ import java.util.Optional;
 @Service
 public class SpecialtyService {
 
+    @Autowired
     private SpecialtyRepository repo;
     private ModelMapper modelMapper;
 
-    public SpecialtyService(SpecialtyRepository specialtyRepository, ModelMapper modelMapper) {
-        this.repo = specialtyRepository;
+    public SpecialtyService(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 

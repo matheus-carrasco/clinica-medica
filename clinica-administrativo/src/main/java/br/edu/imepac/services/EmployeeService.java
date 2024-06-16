@@ -6,6 +6,7 @@ import br.edu.imepac.models.EmployeeModel;
 import br.edu.imepac.repositories.EmployeeRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,11 @@ import java.util.Optional;
 @Service
 public class EmployeeService {
 
+    @Autowired
     private EmployeeRepository repo;
     private ModelMapper modelMapper;
 
-    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper){
-        this.repo = employeeRepository;
+    public EmployeeService(ModelMapper modelMapper){
         this.modelMapper = modelMapper;
     }
 

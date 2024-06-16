@@ -8,6 +8,7 @@ import br.edu.imepac.repositories.DoctorRepository;
 import br.edu.imepac.repositories.SpecialtyRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,15 +17,15 @@ import java.util.Optional;
 @Service
 public class DoctorService {
 
+    @Autowired
     private DoctorRepository repo;
 
+    @Autowired
     private SpecialtyRepository specialtyRepo;
 
     private ModelMapper modelMapper;
 
-    public DoctorService(DoctorRepository doctorRepository, SpecialtyRepository specialtyRepo, ModelMapper modelMapper) {
-        this.repo = doctorRepository;
-        this.specialtyRepo = specialtyRepo;
+    public DoctorService(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 

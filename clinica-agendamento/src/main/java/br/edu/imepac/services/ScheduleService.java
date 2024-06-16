@@ -6,6 +6,7 @@ import br.edu.imepac.models.ScheduleModel;
 import br.edu.imepac.repositories.ScheduleRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,11 @@ import java.util.Optional;
 @Service
 public class ScheduleService {
 
+    @Autowired
     private ScheduleRepository repo;
     private ModelMapper modelMapper;
 
-    public ScheduleService(ScheduleRepository scheduleRepository, ModelMapper modelMapper){
-        this.repo = scheduleRepository;
+    public ScheduleService(ModelMapper modelMapper){
         this.modelMapper = modelMapper;
     }
 

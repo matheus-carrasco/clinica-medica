@@ -4,6 +4,7 @@ import br.edu.imepac.dtos.patients.PatientCreateRequest;
 import br.edu.imepac.dtos.patients.PatientDto;
 import br.edu.imepac.models.PatientModel;
 import br.edu.imepac.services.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,11 +17,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/patients")
 public class PatientController {
 
+    @Autowired
     private PatientService service;
-
-    public PatientController(PatientService service){
-        this.service = service;
-    }
 
     @GetMapping
     public ResponseEntity<List<PatientDto>> findAll(){

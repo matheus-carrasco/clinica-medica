@@ -1,13 +1,10 @@
 package br.edu.imepac.controllers;
 
-import br.edu.imepac.dtos.patients.PatientCreateRequest;
-import br.edu.imepac.dtos.patients.PatientDto;
 import br.edu.imepac.dtos.schedules.ScheduleCreateRequest;
 import br.edu.imepac.dtos.schedules.ScheduleDto;
-import br.edu.imepac.models.PatientModel;
 import br.edu.imepac.models.ScheduleModel;
-import br.edu.imepac.services.PatientService;
 import br.edu.imepac.services.ScheduleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -20,11 +17,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/schedules")
 public class ScheduleController {
 
+    @Autowired
     private ScheduleService service;
-
-    public ScheduleController(ScheduleService service){
-        this.service = service;
-    }
 
     @GetMapping
     public ResponseEntity<List<ScheduleDto>> findAll(){

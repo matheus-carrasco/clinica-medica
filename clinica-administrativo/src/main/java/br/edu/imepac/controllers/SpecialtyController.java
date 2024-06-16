@@ -4,6 +4,7 @@ import br.edu.imepac.dtos.specialty.SpecialtyCreateRequest;
 import br.edu.imepac.dtos.specialty.SpecialtyDto;
 import br.edu.imepac.models.SpecialtyModel;
 import br.edu.imepac.services.SpecialtyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,11 +17,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/specialties")
 public class SpecialtyController {
 
+    @Autowired
     private SpecialtyService service;
-
-    public SpecialtyController(SpecialtyService service){
-        this.service = service;
-    }
 
     @GetMapping
     public ResponseEntity<List<SpecialtyDto>> findAll(){

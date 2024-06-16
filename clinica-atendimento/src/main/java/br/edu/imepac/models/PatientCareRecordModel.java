@@ -5,18 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 @Entity
+@Table(name = "patient_care_record")
 @Data
-@Table(name = "schedules")
 @NoArgsConstructor
 @AllArgsConstructor
-public class ScheduleModel {
+public class PatientCareRecordModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long doctorId;
-    private Long employeeId;
-    private Date date;
+    private String historyDescription;
+    private String prescription;
+    private String examRequest;
 }

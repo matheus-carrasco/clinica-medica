@@ -4,6 +4,7 @@ import br.edu.imepac.dtos.employees.EmployeeCreateRequest;
 import br.edu.imepac.dtos.employees.EmployeeDto;
 import br.edu.imepac.models.EmployeeModel;
 import br.edu.imepac.services.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,11 +17,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/employees")
 public class EmployeeController {
 
+    @Autowired
     private EmployeeService service;
-
-    public EmployeeController(EmployeeService service){
-        this.service = service;
-    }
 
     @GetMapping
     public ResponseEntity<List<EmployeeDto>> findAll(){
