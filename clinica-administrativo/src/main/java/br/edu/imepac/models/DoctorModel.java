@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "doctors")
@@ -23,10 +24,14 @@ public class DoctorModel implements Serializable {
     private String crm;
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "specialty_id", nullable = false)
-    @JsonBackReference
-    private SpecialtyModel specialty;
+    @OneToMany
+    @JoinColumn(name = "doctor_id")
+    private List<SpecialtyModel> specialties;
 
-
+    public DoctorModel(Long id, String name, String password, String crm) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.crm = crm;
+    }
 }

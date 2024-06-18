@@ -39,9 +39,7 @@ public class DoctorService {
     }
 
     public DoctorDto insert(DoctorCreateRequest request){
-        Optional<SpecialtyModel> specialty = specialtyRepo.findById(request.getSpecialty().getId());
         DoctorModel savedObj = modelMapper.map(request, DoctorModel.class);
-        savedObj.setSpecialty(specialty.get());
         repo.save(savedObj);
         return modelMapper.map(savedObj, DoctorDto.class);
     }

@@ -13,9 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.TimeZone;
+import java.util.*;
 
 @Configuration
 public class Instantiation implements CommandLineRunner {
@@ -44,21 +42,23 @@ public class Instantiation implements CommandLineRunner {
         SpecialtyModel oftalmologista = new SpecialtyModel(null, "oftalmologista");
         SpecialtyModel psiquiatra = new SpecialtyModel(null, "psiquiatra");
         specialtyRepository.saveAll(Arrays.asList(  cardiologista, ginecologista, pediatra, oftalmologista, psiquiatra));
+        List<SpecialtyModel> lista = new ArrayList<>();
+        lista.add(ginecologista);
+        lista.add(cardiologista);
 
-        DoctorModel alex = new DoctorModel(null, "Alex dos Santos", "102345", "F7dK9sL3!", cardiologista);
-        DoctorModel maria = new DoctorModel(null, "Maria dos Santos", "204678", "mR8tY4n2", ginecologista);
-        DoctorModel joao = new DoctorModel(null, "Joao Costa", "308912", "W6xB1pQ7",pediatra);
-        DoctorModel bruno = new DoctorModel(null, "Bruno Oliveira", "567890", "aP5wR3x8",oftalmologista);
-        DoctorModel carla = new DoctorModel(null, "Carla Pereira", "678901", "bN2yU6q4",psiquiatra);
+        DoctorModel alex = new DoctorModel(null, "Alex dos Santos", "102345", "F7dK9sL3!");
+        DoctorModel maria = new DoctorModel(null, "Maria dos Santos", "204678", "mR8tY4n2");
+        DoctorModel joao = new DoctorModel(null, "Joao Costa", "308912", "W6xB1pQ7");
+        DoctorModel bruno = new DoctorModel(null, "Bruno Oliveira", "567890", "aP5wR3x8");
+        DoctorModel carla = new DoctorModel(null, "Carla Pereira", "678901", "bN2yU6q4");
+        alex.setSpecialties(lista);
+        maria.setSpecialties(Arrays.asList(ginecologista));
+        joao.setSpecialties(Arrays.asList((pediatra)));
+        bruno.setSpecialties(Arrays.asList(oftalmologista, psiquiatra));
+        carla.setSpecialties(Arrays.asList(psiquiatra));
         doctorRepository.saveAll(Arrays.asList(alex, maria, joao, bruno, carla));
 
-        cardiologista.setDoctors(Arrays.asList(alex));
-        ginecologista.setDoctors(Arrays.asList(maria));
-        pediatra.setDoctors(Arrays.asList(joao));
-        oftalmologista.setDoctors(Arrays.asList(bruno));
-        psiquiatra.setDoctors(Arrays.asList(carla));
-        specialtyRepository.saveAll(Arrays.asList(  cardiologista, ginecologista, pediatra, oftalmologista, psiquiatra));
-
+/*
         HealthInsuranceModel unimed = new HealthInsuranceModel(null, "Unimed", "02.812.468/0001-06","(34) 3239-6941");
         HealthInsuranceModel amil = new HealthInsuranceModel(null,"Amil", "29.309.127/0001-79", "(21) 3003-1333");
         HealthInsuranceModel bradescoSaude = new HealthInsuranceModel(null, "Bradesco Saude","92.693.118/0001-60", "(11) 2184-4585");
@@ -72,5 +72,7 @@ public class Instantiation implements CommandLineRunner {
         EmployeeModel carlos = new EmployeeModel(null, "Carlos Oliveira", "23.123.987", "333.222.111-00", "Avenida das Palmeiras 789", "Salvador", "BA", "71987654321", "2938475-9283", "29384756123-5", sdf.parse("22/08/1982"));
         EmployeeModel julia = new EmployeeModel(null, "Júlia Santos", "24.345.678", "888.777.666-55", "Rua das Flores 17", "Curitiba", "PR", "41987654321", "3847562-9384", "84930284756-6", sdf.parse("18/04/1993"));
         employeeRepository.saveAll(Arrays.asList(lucas, pedro, ana, carlos, julia));
+*/
+
     }
 }
