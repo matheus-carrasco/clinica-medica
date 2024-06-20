@@ -1,6 +1,6 @@
 package br.edu.imepac.dtos.employees;
 
-import br.edu.imepac.models.EmployeeModel;
+import br.edu.imepac.models.administrativo.EmployeeModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +19,7 @@ public class EmployeeDto {
     private String state;
     private String phone;
     private Date dateOfBirth;
+
 
     public EmployeeDto(EmployeeModel model){
         this.id = model.getId();

@@ -1,21 +1,22 @@
-package br.edu.imepac.models;
+package br.edu.imepac.models.administrativo;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Entity
-@Table(name = "patient_care_record")
+@Table(name = "specialties")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientCareRecordModel {
+public class SpecialtyModel  implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String historyDescription;
-    private String prescription;
-    private String examRequest;
+    private String description;
 }

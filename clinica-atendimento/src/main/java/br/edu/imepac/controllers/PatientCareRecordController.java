@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping("/records")
 public class PatientCareRecordController {
 
     @Autowired

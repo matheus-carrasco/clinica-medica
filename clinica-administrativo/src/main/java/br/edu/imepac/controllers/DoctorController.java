@@ -2,14 +2,13 @@ package br.edu.imepac.controllers;
 
 import br.edu.imepac.dtos.doctors.DoctorCreateRequest;
 import br.edu.imepac.dtos.doctors.DoctorDto;
-import br.edu.imepac.models.DoctorModel;
+import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,10 +33,9 @@ public class DoctorController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody DoctorCreateRequest request){
+    public ResponseEntity<DoctorDto> insert(@RequestBody DoctorCreateRequest request){
         DoctorDto obj = service.insert(request);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return new ResponseEntity<>(obj, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -47,8 +45,8 @@ public class DoctorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DoctorDto> update(@PathVariable Long id, @RequestBody DoctorDto newDto){
-        DoctorDto updated = service.update(id, newDto);
+    public ResponseEntity<DoctorDto> update(@PathVariable Long id, @RequestBody DoctorDto details){
+        DoctorDto updated = service.update(id, details);
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,8 +1,7 @@
 package br.edu.imepac.dtos.doctors;
 
-import br.edu.imepac.dtos.specialty.SpecialtyDto;
-import br.edu.imepac.models.DoctorModel;
-import br.edu.imepac.models.SpecialtyModel;
+import br.edu.imepac.models.administrativo.DoctorModel;
+import br.edu.imepac.models.administrativo.SpecialtyModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

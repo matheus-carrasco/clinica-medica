@@ -1,4 +1,4 @@
-package br.edu.imepac.models;
+package br.edu.imepac.models.agendamento;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

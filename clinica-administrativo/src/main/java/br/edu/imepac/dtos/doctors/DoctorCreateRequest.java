@@ -1,6 +1,6 @@
 package br.edu.imepac.dtos.doctors;
 
-import br.edu.imepac.models.SpecialtyModel;
+import br.edu.imepac.models.administrativo.SpecialtyModel;
 import lombok.Data;
 
 @Data

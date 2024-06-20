@@ -1,6 +1,6 @@
 package br.edu.imepac.repositories;
 
-import br.edu.imepac.models.ScheduleModel;
+import br.edu.imepac.models.agendamento.ScheduleModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

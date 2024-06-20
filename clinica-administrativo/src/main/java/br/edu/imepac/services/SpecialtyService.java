@@ -2,7 +2,7 @@ package br.edu.imepac.services;
 
 import br.edu.imepac.dtos.specialty.SpecialtyCreateRequest;
 import br.edu.imepac.dtos.specialty.SpecialtyDto;
-import br.edu.imepac.models.SpecialtyModel;
+import br.edu.imepac.models.administrativo.SpecialtyModel;
 import br.edu.imepac.repositories.SpecialtyRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;

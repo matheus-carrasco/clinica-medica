@@ -2,7 +2,7 @@ package br.edu.imepac.controllers;
 
 import br.edu.imepac.dtos.employees.EmployeeCreateRequest;
 import br.edu.imepac.dtos.employees.EmployeeDto;
-import br.edu.imepac.models.EmployeeModel;
+import br.edu.imepac.models.administrativo.EmployeeModel;
 import br.edu.imepac.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

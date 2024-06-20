@@ -1,6 +1,5 @@
-package br.edu.imepac.models;
+package br.edu.imepac.models.administrativo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

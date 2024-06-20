@@ -2,8 +2,7 @@ package br.edu.imepac.services;
 
 import br.edu.imepac.dtos.doctors.DoctorCreateRequest;
 import br.edu.imepac.dtos.doctors.DoctorDto;
-import br.edu.imepac.models.DoctorModel;
-import br.edu.imepac.models.SpecialtyModel;
+import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.repositories.DoctorRepository;
 import br.edu.imepac.repositories.SpecialtyRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
@@ -39,20 +38,24 @@ public class DoctorService {
     }
 
     public DoctorDto insert(DoctorCreateRequest request){
-        DoctorModel savedObj = modelMapper.map(request, DoctorModel.class);
-        repo.save(savedObj);
+        DoctorModel model = modelMapper.map(request, DoctorModel.class);
+        DoctorModel savedObj = repo.save(model);
         return modelMapper.map(savedObj, DoctorDto.class);
     }
 
     public void delete(Long id){
-        findById(id);
         repo.deleteById(id);
     }
 
     public DoctorDto update(Long id, DoctorDto details){
-        findById(id);
-        DoctorModel obj = modelMapper.map(details, DoctorModel.class);
-        repo.save(obj);
-        return modelMapper.map(obj, DoctorDto.class);
+        Optional<DoctorModel> opt = repo.findById(id);
+        if(opt.isPresent()){
+            DoctorModel model = opt.get();
+            DoctorModel savedObj = repo.save(model);
+            return modelMapper.map(savedObj, DoctorDto.class);
+        }
+        else {
+            return null;
+        }
     }
 }

@@ -6,8 +6,8 @@
         <artifactId>clinica-medica</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>clinica-atendimento</artifactId>
-    <name>Archetype - clinica-atendimento</name>
+    <artifactId>clinica-models</artifactId>
+    <name>Archetype - clinica-models</name>
     <url>http://maven.apache.org</url>
 
     <packaging>jar</packaging>
@@ -37,11 +37,6 @@
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>br.edu.imepac</groupId>
-            <artifactId>clinica-models</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

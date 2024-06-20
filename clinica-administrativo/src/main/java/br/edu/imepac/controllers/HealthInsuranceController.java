@@ -2,7 +2,7 @@ package br.edu.imepac.controllers;
 
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceCreateRequest;
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
-import br.edu.imepac.models.HealthInsuranceModel;
+import br.edu.imepac.models.administrativo.HealthInsuranceModel;
 import br.edu.imepac.services.HealthInsuranceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

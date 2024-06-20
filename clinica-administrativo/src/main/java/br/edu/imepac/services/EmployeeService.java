@@ -2,7 +2,7 @@ package br.edu.imepac.services;
 
 import br.edu.imepac.dtos.employees.EmployeeCreateRequest;
 import br.edu.imepac.dtos.employees.EmployeeDto;
-import br.edu.imepac.models.EmployeeModel;
+import br.edu.imepac.models.administrativo.EmployeeModel;
 import br.edu.imepac.repositories.EmployeeRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
