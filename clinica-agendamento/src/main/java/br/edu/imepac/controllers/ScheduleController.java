@@ -2,7 +2,7 @@ package br.edu.imepac.controllers;
 
 import br.edu.imepac.dtos.schedules.ScheduleCreateRequest;
 import br.edu.imepac.dtos.schedules.ScheduleDto;
-import br.edu.imepac.models.ScheduleModel;
+import br.edu.imepac.models.agendamento.ScheduleModel;
 import br.edu.imepac.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

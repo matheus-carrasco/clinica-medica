@@ -18,8 +18,18 @@ public class ScheduleModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id", nullable = false)
     private PatientModel patient;
+
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", nullable = false)
     private DoctorModel doctor;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
     private EmployeeModel employee;
+
     private Date date;
 }

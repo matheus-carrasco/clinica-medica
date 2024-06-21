@@ -2,7 +2,6 @@ package br.edu.imepac.services;
 
 import br.edu.imepac.dtos.patients.PatientCreateRequest;
 import br.edu.imepac.dtos.patients.PatientDto;
-import br.edu.imepac.models.PatientModel;
 import br.edu.imepac.repositories.PatientRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;

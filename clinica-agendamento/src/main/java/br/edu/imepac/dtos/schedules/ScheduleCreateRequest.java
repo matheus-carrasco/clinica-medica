@@ -1,12 +1,15 @@
 package br.edu.imepac.dtos.schedules;
 
+import br.edu.imepac.models.administrativo.DoctorModel;
+import br.edu.imepac.models.administrativo.EmployeeModel;
 import lombok.Data;
 
 import java.util.Date;
 @Data
 public class ScheduleCreateRequest {
 
-    private Long doctorId;
-    private Long employeeId;
+    private PatientModel patient;
+    private DoctorModel doctor;
+    private EmployeeModel employee;
     private Date date;
 }

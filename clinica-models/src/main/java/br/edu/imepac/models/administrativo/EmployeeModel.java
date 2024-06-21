@@ -1,5 +1,6 @@
 package br.edu.imepac.models.administrativo;
 
+import br.edu.imepac.models.agendamento.ScheduleModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
@@ -29,4 +31,7 @@ public class EmployeeModel implements Serializable {
     private String workPermitNumber;
     private String pisNumber;
     private Date dateOfBirth;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<ScheduleModel> schedules;
 }

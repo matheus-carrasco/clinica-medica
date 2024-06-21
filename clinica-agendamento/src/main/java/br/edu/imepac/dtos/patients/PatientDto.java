@@ -1,6 +1,5 @@
 package br.edu.imepac.dtos.patients;
 
-import br.edu.imepac.models.PatientModel;
 import lombok.Data;
 
 import java.util.Date;

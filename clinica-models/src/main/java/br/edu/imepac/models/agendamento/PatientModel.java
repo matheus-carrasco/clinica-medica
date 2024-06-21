@@ -1,17 +1,13 @@
 package br.edu.imepac.models.agendamento;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "patients")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class PatientModel {
 
     @Id
@@ -26,5 +22,8 @@ public class PatientModel {
     private Date birthDay;
     private String sex;
     private Boolean hasHealthInsurance;
-    private String HealthInsurance;
+    private String healthInsurance;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<ScheduleModel> schedules;
 }

@@ -16,7 +16,10 @@ public class PatientCareRecordModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
     private PatientModel patient;
+
     private String historyDescription;
     private String prescription;
     private String examRequest;

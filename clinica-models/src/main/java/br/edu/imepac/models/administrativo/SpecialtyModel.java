@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "specialties")
@@ -19,4 +20,8 @@ public class SpecialtyModel  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
+
+    @ManyToMany(mappedBy = "specialties")
+    private List<DoctorModel> doctors;
+
 }

@@ -2,7 +2,7 @@ package br.edu.imepac.services;
 
 import br.edu.imepac.dtos.schedules.ScheduleCreateRequest;
 import br.edu.imepac.dtos.schedules.ScheduleDto;
-import br.edu.imepac.models.ScheduleModel;
+import br.edu.imepac.models.agendamento.ScheduleModel;
 import br.edu.imepac.repositories.ScheduleRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;

@@ -2,7 +2,7 @@ package br.edu.imepac.controllers;
 
 import br.edu.imepac.dtos.specialty.SpecialtyCreateRequest;
 import br.edu.imepac.dtos.specialty.SpecialtyDto;
-import br.edu.imepac.models.SpecialtyModel;
+import br.edu.imepac.models.administrativo.SpecialtyModel;
 import br.edu.imepac.services.SpecialtyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

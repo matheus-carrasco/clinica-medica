@@ -1,5 +1,6 @@
 package br.edu.imepac.models.administrativo;
 
+import br.edu.imepac.models.agendamento.ScheduleModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,9 +24,16 @@ public class DoctorModel implements Serializable {
     private String crm;
     private String password;
 
-    @OneToMany
-    @JoinColumn(name = "doctor_id")
+    @ManyToMany
+    @JoinTable(
+            name = "doctor_specialty",  // nome da tabela de junção
+            joinColumns = @JoinColumn(name = "doctor_id"),  // coluna que referencia DoctorModel
+            inverseJoinColumns = @JoinColumn(name = "specialty_id")  // coluna que referencia SpecialtyModel
+    )
     private List<SpecialtyModel> specialties;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<ScheduleModel> schedules;
 
     public DoctorModel(Long id, String name, String password, String crm) {
         this.id = id;
