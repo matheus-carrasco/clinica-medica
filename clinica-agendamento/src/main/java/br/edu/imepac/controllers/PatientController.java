@@ -1,7 +1,5 @@
 package br.edu.imepac.controllers;
 
-import br.edu.imepac.dtos.doctors.DoctorCreateRequest;
-import br.edu.imepac.dtos.doctors.DoctorDto;
 import br.edu.imepac.dtos.patients.PatientCreateRequest;
 import br.edu.imepac.dtos.patients.PatientDto;
 import br.edu.imepac.models.agendamento.PatientModel;
@@ -10,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 

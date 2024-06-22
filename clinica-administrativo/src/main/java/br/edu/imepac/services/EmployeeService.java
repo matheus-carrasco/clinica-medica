@@ -44,9 +44,10 @@ public class EmployeeService {
     }
 
     public EmployeeDto update(Long id, EmployeeDto details){
-        findById(id);
-        EmployeeModel obj = modelMapper.map(details, EmployeeModel.class);
-        repo.save(obj);
-        return modelMapper.map(obj, EmployeeDto.class);
+        EmployeeModel obj = repo.getReferenceById(id);
+        EmployeeModel updated = modelMapper.map(details, EmployeeModel.class);
+        updated.setId(obj.getId());
+        repo.save(updated);
+        return modelMapper.map(updated, EmployeeDto.class);
     }
 }

@@ -1,6 +1,7 @@
 package br.edu.imepac.models.agendamento;
 
 import br.edu.imepac.models.administrativo.HealthInsuranceModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,6 +24,8 @@ public class PatientModel implements Serializable {
     private String city;
     private String state;
     private String phoneNumber;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDay;
     private String sex;
     private Boolean hasHealthInsurance;

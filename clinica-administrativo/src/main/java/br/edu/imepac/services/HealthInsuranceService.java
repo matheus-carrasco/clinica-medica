@@ -2,9 +2,7 @@ package br.edu.imepac.services;
 
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceCreateRequest;
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
-import br.edu.imepac.dtos.specialty.SpecialtyDto;
 import br.edu.imepac.models.administrativo.HealthInsuranceModel;
-import br.edu.imepac.models.administrativo.SpecialtyModel;
 import br.edu.imepac.repositories.HealthInsurenceRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;

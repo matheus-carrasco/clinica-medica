@@ -1,6 +1,7 @@
 package br.edu.imepac.models.administrativo;
 
 import br.edu.imepac.models.agendamento.ScheduleModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,12 +25,14 @@ public class EmployeeModel implements Serializable {
     private String name;
     private String idNumber;
     private String CpfNumber;
-    private String adress;
+    private String address;
     private String city;
     private String state;
     private String phone;
     private String workPermitNumber;
     private String pisNumber;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)

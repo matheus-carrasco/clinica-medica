@@ -1,7 +1,7 @@
 package br.edu.imepac.services;
 
-import br.edu.imepac.dtos.PatientCareRecordCreateRequest;
-import br.edu.imepac.dtos.PatientCareRecordDto;
+import br.edu.imepac.dtos.records.PatientCareRecordCreateRequest;
+import br.edu.imepac.dtos.records.PatientCareRecordDto;
 import br.edu.imepac.models.atendimento.PatientCareRecordModel;
 import br.edu.imepac.repositories.PatientCareRecordRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;

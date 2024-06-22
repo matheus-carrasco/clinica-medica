@@ -2,6 +2,7 @@ package br.edu.imepac.models.agendamento;
 
 import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.models.administrativo.EmployeeModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,5 +34,6 @@ public class ScheduleModel implements Serializable {
     @JoinColumn(name = "employee_id", nullable = false)
     private EmployeeModel employee;
 
+    @JsonFormat(pattern = "yyyy-DD-mm HH:mm")
     private Date date;
 }

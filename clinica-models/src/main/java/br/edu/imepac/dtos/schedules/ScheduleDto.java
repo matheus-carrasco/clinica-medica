@@ -4,6 +4,7 @@ import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.models.administrativo.EmployeeModel;
 import br.edu.imepac.models.agendamento.PatientModel;
 import br.edu.imepac.models.agendamento.ScheduleModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,6 +15,8 @@ public class ScheduleDto {
     private PatientModel patient;
     private DoctorModel doctor;
     private EmployeeModel employee;
+
+    @JsonFormat(pattern = "yyyy-DD-mm HH:mm")
     private Date date;
 
     public ScheduleDto(ScheduleModel model){

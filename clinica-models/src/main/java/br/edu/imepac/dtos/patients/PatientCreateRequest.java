@@ -1,6 +1,7 @@
 package br.edu.imepac.dtos.patients;
 
-import br.edu.imepac.models.administrativo.HealthInsuranceModel;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 import java.util.Date;

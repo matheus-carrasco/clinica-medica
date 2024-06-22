@@ -29,12 +29,12 @@ public class ScheduleService {
 
     public ScheduleModel findById(Long id){
         Optional<ScheduleModel> obj = repo.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Schedule not found"));
     }
 
     public ScheduleDto insert(ScheduleCreateRequest request){
-        ScheduleModel savedObj = modelMapper.map(request, ScheduleModel.class);
-        repo.save(savedObj);
+        ScheduleModel obj = modelMapper.map(request, ScheduleModel.class);
+        ScheduleModel savedObj = repo.save(obj);
         return modelMapper.map(savedObj, ScheduleDto.class);
     }
 
@@ -44,8 +44,9 @@ public class ScheduleService {
     }
 
     public ScheduleDto update(Long id, ScheduleDto details){
-        findById(id);
-        ScheduleModel obj = modelMapper.map(details, ScheduleModel.class);
+        ScheduleModel obj = repo.getReferenceById(id);
+        modelMapper.map(details, obj);
+        obj.setId(id);
         repo.save(obj);
         return modelMapper.map(obj, ScheduleDto.class);
     }
