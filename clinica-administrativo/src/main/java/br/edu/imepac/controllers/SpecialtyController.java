@@ -5,6 +5,7 @@ import br.edu.imepac.dtos.specialty.SpecialtyDto;
 import br.edu.imepac.models.administrativo.SpecialtyModel;
 import br.edu.imepac.services.SpecialtyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,10 +35,9 @@ public class SpecialtyController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody SpecialtyCreateRequest request){
+    public ResponseEntity<SpecialtyDto> insert(@RequestBody SpecialtyCreateRequest request){
         SpecialtyDto obj = service.insert(request);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return new ResponseEntity<>(obj, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

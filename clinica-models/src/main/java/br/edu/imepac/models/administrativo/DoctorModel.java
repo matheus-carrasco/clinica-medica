@@ -24,7 +24,7 @@ public class DoctorModel implements Serializable {
     private String crm;
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "doctor_specialty",  // nome da tabela de junção
             joinColumns = @JoinColumn(name = "doctor_id"),  // coluna que referencia DoctorModel

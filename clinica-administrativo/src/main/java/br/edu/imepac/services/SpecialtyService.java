@@ -44,9 +44,10 @@ public class SpecialtyService {
     }
 
     public SpecialtyDto update(Long id, SpecialtyDto details){
-        findById(id);
-        SpecialtyModel obj = modelMapper.map(details, SpecialtyModel.class);
-        repo.save(obj);
-        return modelMapper.map(obj, SpecialtyDto.class);
+        SpecialtyModel obj = repo.getReferenceById(id);
+        SpecialtyModel updated = modelMapper.map(details, SpecialtyModel.class);
+        updated.setId(obj.getId());
+        repo.save(updated);
+        return modelMapper.map(updated, SpecialtyDto.class);
     }
 }

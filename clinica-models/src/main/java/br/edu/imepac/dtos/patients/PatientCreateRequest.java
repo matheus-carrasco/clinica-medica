@@ -1,5 +1,6 @@
 package br.edu.imepac.dtos.patients;
 
+import br.edu.imepac.models.administrativo.HealthInsuranceModel;
 import lombok.Data;
 
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.Date;
 @Data
 public class PatientCreateRequest {
 
+    private String name;
     private String rgNumber;
     private String cpfNumber;
     private String address;
@@ -16,5 +18,5 @@ public class PatientCreateRequest {
     private Date birthDay;
     private String sex;
     private Boolean hasHealthInsurance;
-    private String HealthInsurance;
+    private Long healthInsuranceId;
 }

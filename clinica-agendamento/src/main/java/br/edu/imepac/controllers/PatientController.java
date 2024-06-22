@@ -1,9 +1,13 @@
 package br.edu.imepac.controllers;
 
+import br.edu.imepac.dtos.doctors.DoctorCreateRequest;
+import br.edu.imepac.dtos.doctors.DoctorDto;
 import br.edu.imepac.dtos.patients.PatientCreateRequest;
 import br.edu.imepac.dtos.patients.PatientDto;
+import br.edu.imepac.models.agendamento.PatientModel;
 import br.edu.imepac.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -33,10 +37,9 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody PatientCreateRequest request){
+    public ResponseEntity<PatientDto> insert(@RequestBody PatientCreateRequest request){
         PatientDto obj = service.insert(request);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return new ResponseEntity<>(obj, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

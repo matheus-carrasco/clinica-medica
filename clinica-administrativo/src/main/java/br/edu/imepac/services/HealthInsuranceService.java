@@ -2,7 +2,9 @@ package br.edu.imepac.services;
 
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceCreateRequest;
 import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
+import br.edu.imepac.dtos.specialty.SpecialtyDto;
 import br.edu.imepac.models.administrativo.HealthInsuranceModel;
+import br.edu.imepac.models.administrativo.SpecialtyModel;
 import br.edu.imepac.repositories.HealthInsurenceRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -17,6 +19,7 @@ public class HealthInsuranceService {
 
     @Autowired
     private HealthInsurenceRepository repo;
+
     private ModelMapper modelMapper;
 
     public HealthInsuranceService(ModelMapper modelMapper){
@@ -29,12 +32,12 @@ public class HealthInsuranceService {
 
     public HealthInsuranceModel findById(Long id){
         Optional<HealthInsuranceModel> obj = repo.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Health Insurance not found"));
     }
 
     public HealthInsuranceDto insert(HealthInsuranceCreateRequest request){
-        HealthInsuranceModel savedObj = modelMapper.map(request, HealthInsuranceModel.class);
-        repo.save(savedObj);
+        HealthInsuranceModel healthInsurance = modelMapper.map(request, HealthInsuranceModel.class);
+        HealthInsuranceModel savedObj = repo.save(healthInsurance);
         return modelMapper.map(savedObj, HealthInsuranceDto.class);
     }
 
@@ -44,9 +47,10 @@ public class HealthInsuranceService {
     }
 
     public HealthInsuranceDto update(Long id, HealthInsuranceDto details){
-        findById(id);
-        HealthInsuranceModel obj = modelMapper.map(details, HealthInsuranceModel.class);
-        repo.save(obj);
-        return modelMapper.map(obj, HealthInsuranceDto.class);
+        HealthInsuranceModel obj = repo.getReferenceById(id);
+        HealthInsuranceModel updated = modelMapper.map(details, HealthInsuranceModel.class);
+        updated.setId(obj.getId());
+        repo.save(updated);
+        return modelMapper.map(updated, HealthInsuranceDto.class);
     }
 }

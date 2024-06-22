@@ -5,6 +5,7 @@ import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
 import br.edu.imepac.models.administrativo.HealthInsuranceModel;
 import br.edu.imepac.services.HealthInsuranceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/healthinsurances")
+@RequestMapping("/health_insurances")
 public class HealthInsuranceController {
 
     @Autowired
@@ -34,10 +35,9 @@ public class HealthInsuranceController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody HealthInsuranceCreateRequest request){
+    public ResponseEntity<HealthInsuranceDto> insert(@RequestBody HealthInsuranceCreateRequest request){
         HealthInsuranceDto obj = service.insert(request);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return new ResponseEntity<>(obj, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

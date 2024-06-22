@@ -29,7 +29,7 @@ public class EmployeeService {
 
     public EmployeeModel findById(Long id){
         Optional<EmployeeModel> obj = repo.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Employee not found"));
     }
 
     public EmployeeDto insert(EmployeeCreateRequest request){

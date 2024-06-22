@@ -5,6 +5,7 @@ import br.edu.imepac.dtos.employees.EmployeeDto;
 import br.edu.imepac.models.administrativo.EmployeeModel;
 import br.edu.imepac.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,10 +35,9 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody EmployeeCreateRequest request){
+    public ResponseEntity<EmployeeDto> insert(@RequestBody EmployeeCreateRequest request){
         EmployeeDto obj = service.insert(request);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return new ResponseEntity<>(obj, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

@@ -1,5 +1,6 @@
 package br.edu.imepac.models.administrativo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SpecialtyModel  implements Serializable {
+public class SpecialtyModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,6 +22,7 @@ public class SpecialtyModel  implements Serializable {
     private Long id;
     private String description;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "specialties")
     private List<DoctorModel> doctors;
 

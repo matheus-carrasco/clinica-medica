@@ -1,5 +1,6 @@
-package br.edu.imepac.dtos;
+package br.edu.imepac.dtos.records;
 
+import br.edu.imepac.models.agendamento.PatientModel;
 import lombok.Data;
 
 @Data

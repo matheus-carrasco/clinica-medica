@@ -1,5 +1,6 @@
 package br.edu.imepac.dtos.doctors;
 
+
 import br.edu.imepac.models.administrativo.SpecialtyModel;
 import lombok.Data;
 
@@ -10,5 +11,5 @@ public class DoctorCreateRequest {
     private String name;
     private String crm;
     private String password;
-    private List<SpecialtyModel> specialty;
+    private List<SpecialtyModel> specialties;
 }
