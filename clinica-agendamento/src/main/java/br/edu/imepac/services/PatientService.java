@@ -4,6 +4,7 @@ import br.edu.imepac.dtos.patients.PatientCreateRequest;
 import br.edu.imepac.dtos.patients.PatientDto;
 import br.edu.imepac.models.administrativo.HealthInsuranceModel;
 import br.edu.imepac.models.agendamento.PatientModel;
+import br.edu.imepac.repositories.HealthInsurenceRepository;
 import br.edu.imepac.repositories.PatientRepository;
 import br.edu.imepac.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,9 @@ public class PatientService {
 
     @Autowired
     private PatientRepository repo;
+
+    @Autowired
+    private HealthInsurenceRepository healthInsurenceRepository;
 
     private ModelMapper modelMapper;
 
@@ -37,10 +41,9 @@ public class PatientService {
     public PatientDto insert(PatientCreateRequest request){
         PatientModel obj = modelMapper.map(request, PatientModel.class);
 
-        if(request.getHealthInsuranceId() != null){
-            HealthInsuranceModel healthInsurance = new HealthInsuranceModel();
-            healthInsurance.setId(request.getHealthInsuranceId());
-            obj.setHealthInsurance(healthInsurance);
+        if(request.getHealthInsurance() != null){
+            Optional<HealthInsuranceModel> healthInsurance = healthInsurenceRepository.findById(request.getHealthInsurance().getId());
+            healthInsurance.ifPresent(obj::setHealthInsurance);
         }
 
         PatientModel savedObj = repo.save(obj);
@@ -55,9 +58,8 @@ public class PatientService {
     public PatientDto update(Long id, PatientDto details){
         PatientModel obj = repo.getReferenceById(id);
         modelMapper.map(details, obj);
-        if(details.getHealthInsuranceId() != null){
-            HealthInsuranceModel healthInsurance = new HealthInsuranceModel();
-            healthInsurance.setId(details.getHealthInsuranceId());
+        if(details.getHealthInsurance() != null){
+            HealthInsuranceModel healthInsurance = details.getHealthInsurance();;
             obj.setHealthInsurance(healthInsurance);
         }
         obj.setId(id);

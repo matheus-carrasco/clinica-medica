@@ -31,7 +31,7 @@ public class PatientModel implements Serializable {
     private Boolean hasHealthInsurance;
 
     @ManyToOne
-    @JoinColumn(name = "health_insurance_id")
+    @JoinColumn(name = "health_insurance_id", nullable = true)
     private HealthInsuranceModel healthInsurance;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)

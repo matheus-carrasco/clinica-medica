@@ -1,6 +1,7 @@
 package br.edu.imepac.models.administrativo;
 
 import br.edu.imepac.models.agendamento.PatientModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class HealthInsuranceModel implements Serializable {
     private String cnpj;
     private String phone;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "healthInsurance", cascade = CascadeType.ALL)
     private List<PatientModel> patients;
 }

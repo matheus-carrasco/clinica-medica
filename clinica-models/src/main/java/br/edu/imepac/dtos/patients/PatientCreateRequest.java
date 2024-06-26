@@ -1,5 +1,6 @@
 package br.edu.imepac.dtos.patients;
 
+import br.edu.imepac.models.administrativo.HealthInsuranceModel;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
@@ -19,5 +20,5 @@ public class PatientCreateRequest {
     private Date birthDay;
     private String sex;
     private Boolean hasHealthInsurance;
-    private Long healthInsuranceId;
+    private HealthInsuranceModel healthInsurance;
 }

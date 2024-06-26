@@ -1,5 +1,6 @@
 package br.edu.imepac.dtos.patients;
 
+import br.edu.imepac.models.administrativo.HealthInsuranceModel;
 import br.edu.imepac.models.agendamento.PatientModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -20,7 +21,7 @@ public class PatientDto {
     private Date birthDay;
     private String sex;
     private Boolean hasHealthInsurance;
-    private Long healthInsuranceId;
+    private HealthInsuranceModel healthInsurance;
 
     public PatientDto(PatientModel model){
         this.id = model.getId();
@@ -30,6 +31,12 @@ public class PatientDto {
         this.birthDay = model.getBirthDay();
         this.sex = model.getSex();
         this.hasHealthInsurance = model.getHasHealthInsurance();
-        this.healthInsuranceId = model.getHealthInsurance() != null ? model.getHealthInsurance().getId() : null;
+
+        if(model.getHealthInsurance() != null){
+            this.healthInsurance = model.getHealthInsurance();;
+        }
+        else {
+            this.healthInsurance = null;
+        }
     }
 }
