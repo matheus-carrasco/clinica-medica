@@ -23,9 +23,8 @@ public class PatientCareRecordController {
 
     @GetMapping
     public ResponseEntity<List<PatientCareRecordDto>> findAll(){
-        List<PatientCareRecordModel> list = service.findAll();
-        List<PatientCareRecordDto> listDto = list.stream().map(x -> new PatientCareRecordDto(x)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDto);
+        List<PatientCareRecordDto> list = service.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/{id}")

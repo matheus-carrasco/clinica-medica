@@ -45,6 +45,7 @@ public class HealthInsuranceService {
     }
 
     public HealthInsuranceDto update(Long id, HealthInsuranceDto details){
+        findById(id);
         HealthInsuranceModel obj = repo.getReferenceById(id);
         HealthInsuranceModel updated = modelMapper.map(details, HealthInsuranceModel.class);
         updated.setId(obj.getId());

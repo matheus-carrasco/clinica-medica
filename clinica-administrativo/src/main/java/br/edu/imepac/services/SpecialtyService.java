@@ -44,6 +44,7 @@ public class SpecialtyService {
     }
 
     public SpecialtyDto update(Long id, SpecialtyDto details){
+        findById(id);
         SpecialtyModel obj = repo.getReferenceById(id);
         SpecialtyModel updated = modelMapper.map(details, SpecialtyModel.class);
         updated.setId(obj.getId());

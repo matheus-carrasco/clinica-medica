@@ -44,6 +44,7 @@ public class EmployeeService {
     }
 
     public EmployeeDto update(Long id, EmployeeDto details){
+        findById(id);
         EmployeeModel obj = repo.getReferenceById(id);
         EmployeeModel updated = modelMapper.map(details, EmployeeModel.class);
         updated.setId(obj.getId());

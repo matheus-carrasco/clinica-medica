@@ -56,6 +56,7 @@ public class PatientService {
     }
 
     public PatientDto update(Long id, PatientDto details){
+        findById(id);
         PatientModel obj = repo.getReferenceById(id);
         modelMapper.map(details, obj);
         if(details.getHealthInsurance() != null){

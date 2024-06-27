@@ -56,6 +56,7 @@ public class DoctorService {
     }
 
     public DoctorDto update(Long id, DoctorDto details){
+        findById(id);
         List<SpecialtyModel> specialties = new ArrayList<>();
         for(SpecialtyModel specialty : details.getSpecialties()){
             SpecialtyModel existingSpecialty = specialtyRepo.findById(specialty.getId()).orElseThrow(() -> new ObjectNotFoundException("Specialty not found"));

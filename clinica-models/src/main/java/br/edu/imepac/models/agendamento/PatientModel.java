@@ -1,15 +1,19 @@
 package br.edu.imepac.models.agendamento;
 
 import br.edu.imepac.models.administrativo.HealthInsuranceModel;
+import br.edu.imepac.models.atendimento.PatientCareRecordModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "patients")
 @Data
 public class PatientModel implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -36,4 +40,8 @@ public class PatientModel implements Serializable {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<ScheduleModel> schedules;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PatientCareRecordModel> careRecords = new ArrayList<>();
 }
