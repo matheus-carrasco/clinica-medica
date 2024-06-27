@@ -1,10 +1,13 @@
 package br.edu.imepac.controllers;
 
+import br.edu.imepac.dtos.patients.PatientCreateRequest;
+import br.edu.imepac.dtos.patients.PatientDto;
 import br.edu.imepac.dtos.schedules.ScheduleCreateRequest;
 import br.edu.imepac.dtos.schedules.ScheduleDto;
 import br.edu.imepac.models.agendamento.ScheduleModel;
 import br.edu.imepac.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,10 +37,9 @@ public class ScheduleController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody ScheduleCreateRequest request){
+    public ResponseEntity<ScheduleDto> insert(@RequestBody ScheduleCreateRequest request){
         ScheduleDto obj = service.insert(request);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return new ResponseEntity<>(obj, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -49,6 +51,6 @@ public class ScheduleController {
     @PutMapping("/{id}")
     public ResponseEntity<ScheduleDto> update(@PathVariable Long id, @RequestBody ScheduleDto newDto){
         ScheduleDto updated = service.update(id, newDto);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(updated);
     }
 }

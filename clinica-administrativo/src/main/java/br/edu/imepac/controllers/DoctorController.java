@@ -47,6 +47,6 @@ public class DoctorController {
     @PutMapping("/{id}")
     public ResponseEntity<DoctorDto> update(@PathVariable Long id, @RequestBody DoctorDto details){
         DoctorDto updated = service.update(id, details);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(updated);
     }
 }

@@ -47,6 +47,6 @@ public class HealthInsuranceController {
     @PutMapping("/{id}")
     public ResponseEntity<HealthInsuranceDto> update(@PathVariable Long id, @RequestBody HealthInsuranceDto newDto){
         HealthInsuranceDto updated = service.update(id, newDto);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(updated);
     }
 }

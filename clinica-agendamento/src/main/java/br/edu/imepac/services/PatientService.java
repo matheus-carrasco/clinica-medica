@@ -21,7 +21,7 @@ public class PatientService {
     private PatientRepository repo;
 
     @Autowired
-    private HealthInsurenceRepository healthInsurenceRepository;
+    private HealthInsurenceRepository healthInsuranceRepository;
 
     private ModelMapper modelMapper;
 
@@ -41,11 +41,11 @@ public class PatientService {
     public PatientDto insert(PatientCreateRequest request){
         PatientModel obj = modelMapper.map(request, PatientModel.class);
 
-        if(request.getHealthInsurance() != null){
-            Optional<HealthInsuranceModel> healthInsurance = healthInsurenceRepository.findById(request.getHealthInsurance().getId());
-            healthInsurance.ifPresent(obj::setHealthInsurance);
+        if (request.getHealthInsurance() != null && request.getHealthInsurance().getId() != null) {
+            HealthInsuranceModel healthInsurance = healthInsuranceRepository.findById(request.getHealthInsurance().getId())
+                    .orElseThrow(() -> new ObjectNotFoundException("Health Insurance not found"));
+            obj.setHealthInsurance(healthInsurance);
         }
-
         PatientModel savedObj = repo.save(obj);
         return modelMapper.map(savedObj, PatientDto.class);
     }
@@ -59,9 +59,12 @@ public class PatientService {
         findById(id);
         PatientModel obj = repo.getReferenceById(id);
         modelMapper.map(details, obj);
-        if(details.getHealthInsurance() != null){
-            HealthInsuranceModel healthInsurance = details.getHealthInsurance();;
+        if (details.getHealthInsurance() != null && details.getHealthInsurance().getId() != null) {
+            HealthInsuranceModel healthInsurance = healthInsuranceRepository.findById(details.getHealthInsurance().getId())
+                    .orElseThrow(() -> new ObjectNotFoundException("Health Insurance not found"));
             obj.setHealthInsurance(healthInsurance);
+        } else {
+            obj.setHealthInsurance(null);
         }
         obj.setId(id);
         repo.save(obj);

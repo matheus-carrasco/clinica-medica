@@ -34,10 +34,9 @@ public class PatientCareRecordController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody PatientCareRecordCreateRequest request){
+    public ResponseEntity<PatientCareRecordDto> insert(@RequestBody PatientCareRecordCreateRequest request){
         PatientCareRecordDto obj = service.insert(request);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.ok().body(obj);
     }
 
     @DeleteMapping("/{id}")
@@ -49,6 +48,6 @@ public class PatientCareRecordController {
     @PutMapping("/{id}")
     public ResponseEntity<PatientCareRecordDto> update(@PathVariable Long id, @RequestBody PatientCareRecordDto newDto){
         PatientCareRecordDto updated = service.update(id, newDto);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(updated);
     }
 }

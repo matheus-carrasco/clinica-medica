@@ -1,12 +1,16 @@
 package br.edu.imepac.dtos.patients;
 
+import br.edu.imepac.dtos.records.PatientCareRecordDto;
 import br.edu.imepac.models.administrativo.HealthInsuranceModel;
 import br.edu.imepac.models.agendamento.PatientModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor

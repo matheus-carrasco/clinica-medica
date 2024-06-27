@@ -3,12 +3,14 @@ package br.edu.imepac.models.atendimento;
 import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.models.agendamento.PatientModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity

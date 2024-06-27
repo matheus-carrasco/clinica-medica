@@ -47,6 +47,6 @@ public class SpecialtyController {
     @PutMapping("/{id}")
     public ResponseEntity<SpecialtyDto> update(@PathVariable Long id, @RequestBody SpecialtyDto newDto){
         SpecialtyDto updated = service.update(id, newDto);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(updated);
     }
 }
