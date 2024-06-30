@@ -2,7 +2,9 @@ package br.edu.imepac.dtos.atendimento.records;
 
 import br.edu.imepac.dtos.administrativo.doctors.DoctorDto;
 
+import br.edu.imepac.dtos.administrativo.doctors.DoctorWithoutSpecialtiesDto;
 import br.edu.imepac.dtos.agendamento.patients.PatientDto;
+import br.edu.imepac.dtos.agendamento.patients.PatientWithoutCareRecordsDto;
 import br.edu.imepac.models.atendimento.PatientCareRecordModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -15,8 +17,8 @@ import java.util.Date;
 public class PatientCareRecordDto {
 
     private Long id;
-    private PatientDto patient;
-    private DoctorDto doctor;
+    private PatientWithoutCareRecordsDto patient;
+    private DoctorWithoutSpecialtiesDto doctor;
     private String historyDescription;
     private String prescription;
     private String examRequest;
@@ -26,8 +28,8 @@ public class PatientCareRecordDto {
 
     public PatientCareRecordDto(PatientCareRecordModel model){
         this.id = model.getId();
-        this.patient = model.getPatient() != null ? new PatientDto(model.getPatient()) : null;
-        this.doctor = model.getDoctor() != null ? new DoctorDto(model.getDoctor()) : null;
+        this.patient = model.getPatient() != null ? new PatientWithoutCareRecordsDto(model.getPatient()) : null;
+        this.doctor = model.getDoctor() != null ? new DoctorWithoutSpecialtiesDto(model.getDoctor()) : null;
         this.historyDescription = model.getHistoryDescription();
         this.prescription = model.getPrescription();
         this.examRequest = model.getExamRequest();

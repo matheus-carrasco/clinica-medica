@@ -1,6 +1,8 @@
 package br.edu.imepac.services;
 
 
+import br.edu.imepac.dtos.administrativo.doctors.DoctorWithoutSpecialtiesDto;
+import br.edu.imepac.dtos.agendamento.patients.PatientWithoutCareRecordsDto;
 import br.edu.imepac.dtos.atendimento.records.PatientCareRecordCreateRequest;
 import br.edu.imepac.dtos.atendimento.records.PatientCareRecordDto;
 import br.edu.imepac.exceptions.ObjectNotFoundException;
@@ -68,11 +70,24 @@ public class PatientCareRecordService {
     }
 
     public PatientCareRecordDto update(Long id, PatientCareRecordCreateRequest details) {
-        findById(id);
-        PatientCareRecordModel obj = repo.getReferenceById(id);
-        PatientCareRecordModel updated = modelMapper.map(details, PatientCareRecordModel.class);
-        updated.setId(obj.getId());
-        repo.save(updated);
-        return modelMapper.map(updated, PatientCareRecordDto.class);
+        PatientCareRecordModel obj = findById(id);
+
+        PatientModel patientModel = patientRepository.findById(details.getPatient().getId()).orElseThrow(
+                () -> new ObjectNotFoundException("Patient not found"));
+        PatientWithoutCareRecordsDto patientWithoutCareRecordsDto = modelMapper.map(patientModel, PatientWithoutCareRecordsDto.class);
+
+        DoctorModel doctorModel = doctorRepository.findById(details.getDoctor().getId()).orElseThrow(
+                () -> new ObjectNotFoundException("Doctor not found"));
+        DoctorWithoutSpecialtiesDto doctorWithoutSpecialtiesDto = modelMapper.map(doctorModel, DoctorWithoutSpecialtiesDto.class);
+
+        obj.setPatient(modelMapper.map(patientWithoutCareRecordsDto, PatientModel.class));
+        obj.setDoctor(modelMapper.map(doctorWithoutSpecialtiesDto, DoctorModel.class));
+        obj.setHistoryDescription(details.getHistoryDescription());
+        obj.setPrescription(details.getPrescription());
+        obj.setExamRequest(details.getExamRequest());
+        obj.setCreatedAt(Date.from(LocalDateTime.now().atZone(ZoneOffset.UTC).toInstant()));
+        obj.setId(id);
+        repo.save(obj);
+        return modelMapper.map(obj, PatientCareRecordDto.class);
     }
 }
