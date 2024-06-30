@@ -28,8 +28,8 @@ public class PatientCareRecordDto {
 
     public PatientCareRecordDto(PatientCareRecordModel model){
         this.id = model.getId();
-        this.patient = new PatientDto(model.getPatient());
-        this.doctor = new DoctorDto(model.getDoctor());
+        this.patient = model.getPatient() != null ? new PatientDto(model.getPatient()) : null;
+        this.doctor = model.getDoctor() != null ? new DoctorDto(model.getDoctor()) : null;
         this.historyDescription = model.getHistoryDescription();
         this.prescription = model.getPrescription();
         this.examRequest = model.getExamRequest();

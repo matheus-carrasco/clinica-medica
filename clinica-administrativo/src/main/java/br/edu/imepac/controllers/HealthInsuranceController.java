@@ -1,7 +1,7 @@
 package br.edu.imepac.controllers;
 
-import br.edu.imepac.dtos.health_insurance.HealthInsuranceCreateRequest;
-import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
+import br.edu.imepac.dtos.administrativo.health_insurance.HealthInsuranceCreateRequest;
+import br.edu.imepac.dtos.administrativo.health_insurance.HealthInsuranceDto;
 import br.edu.imepac.models.administrativo.HealthInsuranceModel;
 import br.edu.imepac.services.HealthInsuranceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +32,18 @@ public class HealthInsuranceController {
         return ResponseEntity.ok().body(new HealthInsuranceDto(obj));
     }
 
+    @GetMapping("/findByName")
+    public ResponseEntity<List<HealthInsuranceDto>> findByName(@RequestParam("name") String name){
+        List<HealthInsuranceDto> listDto = service.findByName(name);
+        return ResponseEntity.ok().body(listDto);
+    }
+
+    @GetMapping("/findByCnpjNumber")
+    public ResponseEntity<HealthInsuranceDto> findByCnpjNumber(@RequestParam("cnpj") String cnpj){
+        HealthInsuranceModel obj = service.findByCnpj(cnpj);
+        return ResponseEntity.ok().body(new HealthInsuranceDto(obj));
+    }
+
     @PostMapping
     public ResponseEntity<HealthInsuranceDto> insert(@RequestBody HealthInsuranceCreateRequest request){
         HealthInsuranceDto obj = service.insert(request);
@@ -45,7 +57,7 @@ public class HealthInsuranceController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<HealthInsuranceDto> update(@PathVariable Long id, @RequestBody HealthInsuranceDto newDto){
+    public ResponseEntity<HealthInsuranceDto> update(@PathVariable Long id, @RequestBody HealthInsuranceCreateRequest newDto){
         HealthInsuranceDto updated = service.update(id, newDto);
         return ResponseEntity.ok().body(updated);
     }

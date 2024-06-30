@@ -1,7 +1,7 @@
 package br.edu.imepac.controllers;
 
-import br.edu.imepac.dtos.doctors.DoctorCreateRequest;
-import br.edu.imepac.dtos.doctors.DoctorDto;
+import br.edu.imepac.dtos.administrativo.doctors.DoctorCreateRequest;
+import br.edu.imepac.dtos.administrativo.doctors.DoctorDto;
 import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +32,18 @@ public class DoctorController {
         return ResponseEntity.ok().body(new DoctorDto(obj));
     }
 
+    @GetMapping("/findByName")
+    public ResponseEntity<List<DoctorDto>> findByName(@RequestParam("name") String name){
+        List<DoctorDto> listDto = service.findByName(name);
+        return ResponseEntity.ok().body(listDto);
+    }
+
+    @GetMapping("/findByCrm")
+    public ResponseEntity<DoctorDto> findByDescription(@RequestParam("crm") String crm){
+        DoctorModel obj = service.findByCrm(crm);
+        return ResponseEntity.ok().body(new DoctorDto(obj));
+    }
+
     @PostMapping
     public ResponseEntity<DoctorDto> insert(@RequestBody DoctorCreateRequest request){
         DoctorDto obj = service.insert(request);
@@ -45,7 +57,7 @@ public class DoctorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DoctorDto> update(@PathVariable Long id, @RequestBody DoctorDto details){
+    public ResponseEntity<DoctorDto> update(@PathVariable Long id, @RequestBody DoctorCreateRequest details){
         DoctorDto updated = service.update(id, details);
         return ResponseEntity.ok().body(updated);
     }

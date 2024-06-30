@@ -8,8 +8,8 @@ import java.util.Date;
 public class EmployeeCreateRequest {
 
     private String name;
-    private String idNumber;
-    private String CpfNumber;
+    private String rgNumber;
+    private String cpfNumber;
     private String address;
     private String city;
     private String state;

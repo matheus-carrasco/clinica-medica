@@ -1,10 +1,11 @@
 package br.edu.imepac.services;
 
-import br.edu.imepac.dtos.specialty.SpecialtyCreateRequest;
-import br.edu.imepac.dtos.specialty.SpecialtyDto;
+import br.edu.imepac.dtos.administrativo.specialty.SpecialtyCreateRequest;
+import br.edu.imepac.dtos.administrativo.specialty.SpecialtyDto;
+import br.edu.imepac.dtos.administrativo.specialty.SpecialtyWithDoctorsDto;
 import br.edu.imepac.models.administrativo.SpecialtyModel;
-import br.edu.imepac.repositories.SpecialtyRepository;
-import br.edu.imepac.services.exceptions.ObjectNotFoundException;
+import br.edu.imepac.repositories.administrativo.SpecialtyRepository;
+import br.edu.imepac.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,15 @@ public class SpecialtyService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Specialty not found"));
     }
 
+    public SpecialtyWithDoctorsDto findSpecialtyWithDoctors(Long id){
+        SpecialtyModel obj = repo.findById(id).orElseThrow(() -> new ObjectNotFoundException("Specialty not found"));
+        return new SpecialtyWithDoctorsDto(obj);
+    }
+
+    public SpecialtyModel findByDescription(String description){
+        return repo.findByDescriptionIgnoreCase(description).orElseThrow(() -> new ObjectNotFoundException("Specialty not found"));
+    }
+
     public SpecialtyDto insert(SpecialtyCreateRequest request){
         SpecialtyModel savedObj = modelMapper.map(request, SpecialtyModel.class);
         repo.save(savedObj);
@@ -43,12 +53,11 @@ public class SpecialtyService {
         repo.deleteById(id);
     }
 
-    public SpecialtyDto update(Long id, SpecialtyDto details){
-        findById(id);
-        SpecialtyModel obj = repo.getReferenceById(id);
-        SpecialtyModel updated = modelMapper.map(details, SpecialtyModel.class);
-        updated.setId(obj.getId());
-        repo.save(updated);
-        return modelMapper.map(updated, SpecialtyDto.class);
+    public SpecialtyDto update(Long id, SpecialtyCreateRequest details){
+        SpecialtyModel existing = repo.findById(id).orElseThrow(() -> new ObjectNotFoundException("Specialty not found"));
+        modelMapper.map(details, existing);
+        existing.setId(id);
+        repo.save(existing);
+        return modelMapper.map(existing, SpecialtyDto.class);
     }
 }

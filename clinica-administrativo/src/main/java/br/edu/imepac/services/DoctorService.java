@@ -1,12 +1,12 @@
 package br.edu.imepac.services;
 
-import br.edu.imepac.dtos.doctors.DoctorCreateRequest;
-import br.edu.imepac.dtos.doctors.DoctorDto;
+import br.edu.imepac.dtos.administrativo.doctors.DoctorCreateRequest;
+import br.edu.imepac.dtos.administrativo.doctors.DoctorDto;
 import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.models.administrativo.SpecialtyModel;
-import br.edu.imepac.repositories.DoctorRepository;
-import br.edu.imepac.repositories.SpecialtyRepository;
-import br.edu.imepac.services.exceptions.ObjectNotFoundException;
+import br.edu.imepac.repositories.administrativo.DoctorRepository;
+import br.edu.imepac.repositories.administrativo.SpecialtyRepository;
+import br.edu.imepac.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorService {
@@ -39,6 +40,20 @@ public class DoctorService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Doctor not found"));
     }
 
+    public List<DoctorDto> findByName(String name){
+        List<DoctorModel> list = repo.findByNameContainingIgnoreCase(name);
+        if(list.isEmpty()){
+            throw new ObjectNotFoundException("Doctor not found");
+        }
+        return list.stream()
+                .map(doctor -> modelMapper.map(doctor, DoctorDto.class))
+                .collect(Collectors.toList());
+    }
+
+    public DoctorModel findByCrm(String crm){
+        return repo.findByCrmIgnoreCase(crm).orElseThrow(() -> new ObjectNotFoundException("Doctor not found"));
+    }
+
     public DoctorDto insert(DoctorCreateRequest request){
         List<SpecialtyModel> specialties = new ArrayList<>();
         for(SpecialtyModel specialty : request.getSpecialties()){
@@ -55,17 +70,21 @@ public class DoctorService {
         repo.deleteById(id);
     }
 
-    public DoctorDto update(Long id, DoctorDto details){
-        findById(id);
+    public DoctorDto update(Long id, DoctorCreateRequest details){
+        DoctorModel existing = repo.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Doctor not found"));
+        modelMapper.map(details, existing);
+
         List<SpecialtyModel> specialties = new ArrayList<>();
         for(SpecialtyModel specialty : details.getSpecialties()){
-            SpecialtyModel existingSpecialty = specialtyRepo.findById(specialty.getId()).orElseThrow(() -> new ObjectNotFoundException("Specialty not found"));
+            SpecialtyModel existingSpecialty = specialtyRepo.findById(specialty.getId())
+                    .orElseThrow(() -> new ObjectNotFoundException("Specialty not found"));
             specialties.add(existingSpecialty);
         }
-        DoctorModel model = modelMapper.map(details, DoctorModel.class);
-        model.setSpecialties(specialties);
-        model.setId(id);
-        repo.save(model);
-        return modelMapper.map(model, DoctorDto.class);
+        existing.setSpecialties(specialties);
+        existing.setId(id);
+
+        repo.save(existing);
+        return modelMapper.map(existing, DoctorDto.class);
     }
 }

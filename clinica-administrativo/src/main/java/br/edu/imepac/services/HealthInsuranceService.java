@@ -1,22 +1,23 @@
 package br.edu.imepac.services;
 
-import br.edu.imepac.dtos.health_insurance.HealthInsuranceCreateRequest;
-import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
+import br.edu.imepac.dtos.administrativo.health_insurance.HealthInsuranceCreateRequest;
+import br.edu.imepac.dtos.administrativo.health_insurance.HealthInsuranceDto;
 import br.edu.imepac.models.administrativo.HealthInsuranceModel;
-import br.edu.imepac.repositories.HealthInsurenceRepository;
-import br.edu.imepac.services.exceptions.ObjectNotFoundException;
+import br.edu.imepac.repositories.administrativo.HealthInsuranceRepository;
+import br.edu.imepac.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class HealthInsuranceService {
 
     @Autowired
-    private HealthInsurenceRepository repo;
+    private HealthInsuranceRepository repo;
 
     private ModelMapper modelMapper;
 
@@ -33,6 +34,20 @@ public class HealthInsuranceService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Health Insurance not found"));
     }
 
+    public List<HealthInsuranceDto> findByName(String name){
+        List<HealthInsuranceModel> list = repo.findByNameContainingIgnoreCase(name);
+        if(list.isEmpty()){
+            throw new ObjectNotFoundException("Health Insurance not found");
+        }
+        return list.stream()
+                .map(doctor -> modelMapper.map(doctor, HealthInsuranceDto.class))
+                .collect(Collectors.toList());
+    }
+
+    public HealthInsuranceModel findByCnpj(String cnpj){
+        return repo.findByCnpjIgnoreCase(cnpj).orElseThrow(() -> new ObjectNotFoundException("Health Insurance not found"));
+    }
+
     public HealthInsuranceDto insert(HealthInsuranceCreateRequest request){
         HealthInsuranceModel healthInsurance = modelMapper.map(request, HealthInsuranceModel.class);
         HealthInsuranceModel savedObj = repo.save(healthInsurance);
@@ -44,12 +59,11 @@ public class HealthInsuranceService {
         repo.deleteById(id);
     }
 
-    public HealthInsuranceDto update(Long id, HealthInsuranceDto details){
-        findById(id);
-        HealthInsuranceModel obj = repo.getReferenceById(id);
-        HealthInsuranceModel updated = modelMapper.map(details, HealthInsuranceModel.class);
-        updated.setId(obj.getId());
-        repo.save(updated);
-        return modelMapper.map(updated, HealthInsuranceDto.class);
+    public HealthInsuranceDto update(Long id, HealthInsuranceCreateRequest details){
+        HealthInsuranceModel existing = repo.findById(id).orElseThrow(() -> new ObjectNotFoundException("Health Insurance not found"));
+        modelMapper.map(details, existing);
+        existing.setId(id);
+        repo.save(existing);
+        return modelMapper.map(existing, HealthInsuranceDto.class);
     }
 }

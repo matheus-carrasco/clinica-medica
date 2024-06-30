@@ -1,10 +1,9 @@
 package br.edu.imepac.dtos.patients;
 
-import br.edu.imepac.dtos.records.PatientCareRecordDto;
-import br.edu.imepac.models.administrativo.HealthInsuranceModel;
+import br.edu.imepac.dtos.health_insurance.HealthInsuranceDto;
+import br.edu.imepac.dtos.records.PatientCareRecordWithouPatientDto;
 import br.edu.imepac.models.agendamento.PatientModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,7 +24,9 @@ public class PatientDto {
     private Date birthDay;
     private String sex;
     private Boolean hasHealthInsurance;
-    private HealthInsuranceModel healthInsurance;
+    private HealthInsuranceDto healthInsurance;
+    private List<PatientCareRecordWithouPatientDto> careRecords;
+
 
     public PatientDto(PatientModel model){
         this.id = model.getId();
@@ -35,12 +36,7 @@ public class PatientDto {
         this.birthDay = model.getBirthDay();
         this.sex = model.getSex();
         this.hasHealthInsurance = model.getHasHealthInsurance();
-
-        if(model.getHealthInsurance() != null){
-            this.healthInsurance = model.getHealthInsurance();;
-        }
-        else {
-            this.healthInsurance = null;
-        }
+        this.healthInsurance = model.getHealthInsurance() != null ? new HealthInsuranceDto(model.getHealthInsurance()) : null;
+        this.careRecords = model.getCareRecords().stream().map(PatientCareRecordWithouPatientDto::new).collect(Collectors.toList());
     }
 }

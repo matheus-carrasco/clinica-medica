@@ -1,16 +1,17 @@
 package br.edu.imepac.services;
 
-import br.edu.imepac.dtos.employees.EmployeeCreateRequest;
-import br.edu.imepac.dtos.employees.EmployeeDto;
+import br.edu.imepac.dtos.administrativo.employee.EmployeeCreateRequest;
+import br.edu.imepac.dtos.administrativo.employee.EmployeeDto;
+import br.edu.imepac.exceptions.ObjectNotFoundException;
 import br.edu.imepac.models.administrativo.EmployeeModel;
-import br.edu.imepac.repositories.EmployeeRepository;
-import br.edu.imepac.services.exceptions.ObjectNotFoundException;
+import br.edu.imepac.repositories.administrativo.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -32,6 +33,24 @@ public class EmployeeService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Employee not found"));
     }
 
+    public List<EmployeeDto> findByName(String name){
+        List<EmployeeModel> list = repo.findByNameContainingIgnoreCase(name);
+        if(list.isEmpty()){
+            throw new ObjectNotFoundException("Employee not found");
+        }
+        return list.stream()
+                .map(doctor -> modelMapper.map(doctor, EmployeeDto.class))
+                .collect(Collectors.toList());
+    }
+
+    public EmployeeModel findByRgNumber(String rgNumber){
+        return repo.findByRgNumberIgnoreCase(rgNumber).orElseThrow(() -> new ObjectNotFoundException("Employee not found"));
+    }
+
+    public EmployeeModel findByCpfNumber(String cpfNumber){
+        return repo.findByCpfNumberIgnoreCase(cpfNumber).orElseThrow(() -> new ObjectNotFoundException("Employee not found"));
+    }
+
     public EmployeeDto insert(EmployeeCreateRequest request){
         EmployeeModel savedObj = modelMapper.map(request, EmployeeModel.class);
         repo.save(savedObj);
@@ -43,12 +62,11 @@ public class EmployeeService {
         repo.deleteById(id);
     }
 
-    public EmployeeDto update(Long id, EmployeeDto details){
-        findById(id);
-        EmployeeModel obj = repo.getReferenceById(id);
-        EmployeeModel updated = modelMapper.map(details, EmployeeModel.class);
-        updated.setId(obj.getId());
-        repo.save(updated);
-        return modelMapper.map(updated, EmployeeDto.class);
+    public EmployeeDto update(Long id, EmployeeCreateRequest details){
+        EmployeeModel existing = repo.findById(id).orElseThrow(() -> new ObjectNotFoundException("Employee not found"));
+        modelMapper.map(details, existing);
+        existing.setId(id);
+        repo.save(existing);
+        return modelMapper.map(existing, EmployeeDto.class);
     }
 }

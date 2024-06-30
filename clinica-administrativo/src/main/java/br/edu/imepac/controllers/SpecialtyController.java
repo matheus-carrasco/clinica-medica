@@ -1,7 +1,8 @@
 package br.edu.imepac.controllers;
 
-import br.edu.imepac.dtos.specialty.SpecialtyCreateRequest;
-import br.edu.imepac.dtos.specialty.SpecialtyDto;
+import br.edu.imepac.dtos.administrativo.specialty.SpecialtyCreateRequest;
+import br.edu.imepac.dtos.administrativo.specialty.SpecialtyDto;
+import br.edu.imepac.dtos.administrativo.specialty.SpecialtyWithDoctorsDto;
 import br.edu.imepac.models.administrativo.SpecialtyModel;
 import br.edu.imepac.services.SpecialtyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,18 @@ public class SpecialtyController {
         return ResponseEntity.ok().body(new SpecialtyDto(obj));
     }
 
+    @GetMapping("/withDoctors/{id}")
+    public ResponseEntity<SpecialtyWithDoctorsDto> findSpecialtyWithDoctors(@PathVariable Long id){
+        SpecialtyWithDoctorsDto obj = service.findSpecialtyWithDoctors(id);
+        return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping("/findByDescription")
+    public ResponseEntity<SpecialtyDto> findByDescription(@RequestParam("description") String description){
+        SpecialtyModel obj = service.findByDescription(description);
+        return ResponseEntity.ok().body(new SpecialtyDto(obj));
+    }
+
     @PostMapping
     public ResponseEntity<SpecialtyDto> insert(@RequestBody SpecialtyCreateRequest request){
         SpecialtyDto obj = service.insert(request);
@@ -45,7 +58,7 @@ public class SpecialtyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SpecialtyDto> update(@PathVariable Long id, @RequestBody SpecialtyDto newDto){
+    public ResponseEntity<SpecialtyDto> update(@PathVariable Long id, @RequestBody SpecialtyCreateRequest newDto){
         SpecialtyDto updated = service.update(id, newDto);
         return ResponseEntity.ok().body(updated);
     }
