@@ -1,4 +1,4 @@
-package br.edu.imepac.controllers.exceptions;
+package br.edu.imepac.exceptions;
 
 import lombok.Data;
 

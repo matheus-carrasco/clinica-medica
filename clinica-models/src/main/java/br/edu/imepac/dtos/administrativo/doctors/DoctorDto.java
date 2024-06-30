@@ -1,4 +1,4 @@
-package br.edu.imepac.dtos.doctors;
+package br.edu.imepac.dtos.administrativo.doctors;
 
 import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.models.administrativo.SpecialtyModel;

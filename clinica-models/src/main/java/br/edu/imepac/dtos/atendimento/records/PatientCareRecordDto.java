@@ -1,15 +1,13 @@
-package br.edu.imepac.dtos.records;
+package br.edu.imepac.dtos.atendimento.records;
 
-import br.edu.imepac.dtos.doctors.DoctorDto;
-import br.edu.imepac.dtos.patients.PatientDto;
-import br.edu.imepac.models.administrativo.DoctorModel;
-import br.edu.imepac.models.agendamento.PatientModel;
+import br.edu.imepac.dtos.administrativo.doctors.DoctorDto;
+
+import br.edu.imepac.dtos.agendamento.patients.PatientDto;
 import br.edu.imepac.models.atendimento.PatientCareRecordModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data

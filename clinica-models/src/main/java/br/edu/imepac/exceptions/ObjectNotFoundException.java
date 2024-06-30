@@ -1,4 +1,4 @@
-package br.edu.imepac.services.exceptions;
+package br.edu.imepac.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 1L;

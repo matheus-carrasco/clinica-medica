@@ -1,4 +1,4 @@
-package br.edu.imepac.dtos.specialty;
+package br.edu.imepac.dtos.administrativo.specialty;
 
 import br.edu.imepac.models.administrativo.SpecialtyModel;
 import lombok.Data;

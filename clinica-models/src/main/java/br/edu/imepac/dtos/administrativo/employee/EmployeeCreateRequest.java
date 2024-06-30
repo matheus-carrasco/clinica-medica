@@ -1,4 +1,4 @@
-package br.edu.imepac.dtos.employees;
+package br.edu.imepac.dtos.administrativo.employee;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

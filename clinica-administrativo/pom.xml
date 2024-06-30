@@ -43,7 +43,6 @@
             <groupId>br.edu.imepac</groupId>
             <artifactId>clinica-models</artifactId>
             <version>1.0-SNAPSHOT</version>
-
         </dependency>
     </dependencies>
 </project>

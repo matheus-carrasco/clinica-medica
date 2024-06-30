@@ -1,4 +1,4 @@
-package br.edu.imepac.dtos.employees;
+package br.edu.imepac.dtos.administrativo.employee;
 
 import br.edu.imepac.models.administrativo.EmployeeModel;
 import com.fasterxml.jackson.annotation.JsonFormat;

@@ -1,4 +1,4 @@
-package br.edu.imepac.repositories;
+package br.edu.imepac.repositories.atendimento;
 
 import br.edu.imepac.models.atendimento.PatientCareRecordModel;
 import org.springframework.data.jpa.repository.JpaRepository;

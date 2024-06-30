@@ -1,4 +1,4 @@
-package br.edu.imepac.dtos.schedules;
+package br.edu.imepac.dtos.agendamento.schedules;
 
 import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.models.administrativo.EmployeeModel;

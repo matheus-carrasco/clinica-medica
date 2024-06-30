@@ -1,10 +1,12 @@
 package br.edu.imepac.services;
 
+
 import br.edu.imepac.dtos.administrativo.health_insurance.HealthInsuranceCreateRequest;
 import br.edu.imepac.dtos.administrativo.health_insurance.HealthInsuranceDto;
-import br.edu.imepac.models.administrativo.HealthInsuranceModel;
-import br.edu.imepac.repositories.administrativo.HealthInsuranceRepository;
 import br.edu.imepac.exceptions.ObjectNotFoundException;
+import br.edu.imepac.models.administrativo.HealthInsuranceModel;
+
+import br.edu.imepac.repositories.administrativo.HealthInsuranceRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +42,7 @@ public class HealthInsuranceService {
             throw new ObjectNotFoundException("Health Insurance not found");
         }
         return list.stream()
-                .map(doctor -> modelMapper.map(doctor, HealthInsuranceDto.class))
+                .map(healthInsurance -> modelMapper.map(healthInsurance, HealthInsuranceDto.class))
                 .collect(Collectors.toList());
     }
 

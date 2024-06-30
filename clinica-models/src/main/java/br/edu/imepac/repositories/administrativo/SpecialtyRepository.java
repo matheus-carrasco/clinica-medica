@@ -1,4 +1,4 @@
-package br.edu.imepac.repositories;
+package br.edu.imepac.repositories.administrativo;
 
 import br.edu.imepac.models.administrativo.SpecialtyModel;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,18 +1,15 @@
 package br.edu.imepac.controllers;
 
-import br.edu.imepac.dtos.patients.PatientCreateRequest;
-import br.edu.imepac.dtos.patients.PatientDto;
-import br.edu.imepac.dtos.schedules.ScheduleCreateRequest;
-import br.edu.imepac.dtos.schedules.ScheduleDto;
+
+import br.edu.imepac.dtos.agendamento.schedules.ScheduleCreateRequest;
+import br.edu.imepac.dtos.agendamento.schedules.ScheduleDto;
 import br.edu.imepac.models.agendamento.ScheduleModel;
 import br.edu.imepac.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,7 +46,7 @@ public class ScheduleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ScheduleDto> update(@PathVariable Long id, @RequestBody ScheduleDto newDto){
+    public ResponseEntity<ScheduleDto> update(@PathVariable Long id, @RequestBody ScheduleCreateRequest newDto){
         ScheduleDto updated = service.update(id, newDto);
         return ResponseEntity.ok().body(updated);
     }

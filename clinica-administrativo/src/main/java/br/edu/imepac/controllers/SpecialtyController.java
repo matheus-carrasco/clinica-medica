@@ -1,5 +1,6 @@
 package br.edu.imepac.controllers;
 
+
 import br.edu.imepac.dtos.administrativo.specialty.SpecialtyCreateRequest;
 import br.edu.imepac.dtos.administrativo.specialty.SpecialtyDto;
 import br.edu.imepac.dtos.administrativo.specialty.SpecialtyWithDoctorsDto;

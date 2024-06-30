@@ -1,18 +1,16 @@
 package br.edu.imepac.controllers;
 
-import br.edu.imepac.dtos.records.PatientCareRecordCreateRequest;
-import br.edu.imepac.dtos.records.PatientCareRecordDto;
+
+import br.edu.imepac.dtos.atendimento.records.PatientCareRecordCreateRequest;
+import br.edu.imepac.dtos.atendimento.records.PatientCareRecordDto;
 import br.edu.imepac.models.atendimento.PatientCareRecordModel;
 import br.edu.imepac.services.PatientCareRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/records")
@@ -46,7 +44,7 @@ public class PatientCareRecordController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PatientCareRecordDto> update(@PathVariable Long id, @RequestBody PatientCareRecordDto newDto){
+    public ResponseEntity<PatientCareRecordDto> update(@PathVariable Long id, @RequestBody PatientCareRecordCreateRequest newDto){
         PatientCareRecordDto updated = service.update(id, newDto);
         return ResponseEntity.ok().body(updated);
     }

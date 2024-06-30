@@ -1,16 +1,17 @@
 package br.edu.imepac.services;
 
-import br.edu.imepac.dtos.schedules.ScheduleCreateRequest;
-import br.edu.imepac.dtos.schedules.ScheduleDto;
+
+import br.edu.imepac.dtos.agendamento.schedules.ScheduleCreateRequest;
+import br.edu.imepac.dtos.agendamento.schedules.ScheduleDto;
+import br.edu.imepac.exceptions.ObjectNotFoundException;
 import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.models.administrativo.EmployeeModel;
 import br.edu.imepac.models.agendamento.PatientModel;
 import br.edu.imepac.models.agendamento.ScheduleModel;
-import br.edu.imepac.repositories.DoctorRepository;
-import br.edu.imepac.repositories.EmployeeRepository;
-import br.edu.imepac.repositories.PatientRepository;
-import br.edu.imepac.repositories.ScheduleRepository;
-import br.edu.imepac.services.exceptions.ObjectNotFoundException;
+import br.edu.imepac.repositories.administrativo.DoctorRepository;
+import br.edu.imepac.repositories.administrativo.EmployeeRepository;
+import br.edu.imepac.repositories.agendamento.PatientRepository;
+import br.edu.imepac.repositories.agendamento.ScheduleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,7 +60,7 @@ public class ScheduleService {
         repo.deleteById(id);
     }
 
-    public ScheduleDto update(Long id, ScheduleDto details){
+    public ScheduleDto update(Long id, ScheduleCreateRequest details){
         ScheduleModel existingSchedule = findById(id);
         ScheduleModel updatedSchedule = verifyRequest(details, existingSchedule);
         repo.save(updatedSchedule);

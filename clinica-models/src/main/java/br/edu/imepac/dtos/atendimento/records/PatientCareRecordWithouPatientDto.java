@@ -1,6 +1,6 @@
-package br.edu.imepac.dtos.records;
+package br.edu.imepac.dtos.atendimento.records;
 
-import br.edu.imepac.dtos.doctors.DoctorWithoutSpecialtiesDto;
+import br.edu.imepac.dtos.administrativo.doctors.DoctorWithoutSpecialtiesDto;
 import br.edu.imepac.models.atendimento.PatientCareRecordModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

@@ -1,10 +1,8 @@
-package br.edu.imepac.dtos.records;
+package br.edu.imepac.dtos.atendimento.records;
 
 import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.models.agendamento.PatientModel;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 public class PatientCareRecordCreateRequest {

@@ -1,4 +1,4 @@
-package br.edu.imepac.dtos.health_insurance;
+package br.edu.imepac.dtos.administrativo.health_insurance;
 
 import br.edu.imepac.models.administrativo.HealthInsuranceModel;
 import lombok.AllArgsConstructor;

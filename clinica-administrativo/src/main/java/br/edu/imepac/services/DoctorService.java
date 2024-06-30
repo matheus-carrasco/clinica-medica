@@ -1,12 +1,13 @@
 package br.edu.imepac.services;
 
+
 import br.edu.imepac.dtos.administrativo.doctors.DoctorCreateRequest;
 import br.edu.imepac.dtos.administrativo.doctors.DoctorDto;
+import br.edu.imepac.exceptions.ObjectNotFoundException;
 import br.edu.imepac.models.administrativo.DoctorModel;
 import br.edu.imepac.models.administrativo.SpecialtyModel;
 import br.edu.imepac.repositories.administrativo.DoctorRepository;
 import br.edu.imepac.repositories.administrativo.SpecialtyRepository;
-import br.edu.imepac.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

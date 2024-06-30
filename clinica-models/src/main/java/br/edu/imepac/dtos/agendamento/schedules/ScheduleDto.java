@@ -1,18 +1,13 @@
-package br.edu.imepac.dtos.schedules;
+package br.edu.imepac.dtos.agendamento.schedules;
 
-import br.edu.imepac.dtos.doctors.DoctorDto;
-import br.edu.imepac.dtos.employees.EmployeeDto;
-import br.edu.imepac.dtos.patients.PatientDto;
-import br.edu.imepac.models.administrativo.DoctorModel;
-import br.edu.imepac.models.administrativo.EmployeeModel;
-import br.edu.imepac.models.agendamento.PatientModel;
+import br.edu.imepac.dtos.administrativo.doctors.DoctorDto;
+import br.edu.imepac.dtos.administrativo.employee.EmployeeDto;
+import br.edu.imepac.dtos.agendamento.patients.PatientDto;
 import br.edu.imepac.models.agendamento.ScheduleModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 
 import java.util.Date;
 @Data

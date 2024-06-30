@@ -1,5 +1,6 @@
 package br.edu.imepac.services;
 
+
 import br.edu.imepac.dtos.administrativo.employee.EmployeeCreateRequest;
 import br.edu.imepac.dtos.administrativo.employee.EmployeeDto;
 import br.edu.imepac.exceptions.ObjectNotFoundException;
@@ -39,7 +40,7 @@ public class EmployeeService {
             throw new ObjectNotFoundException("Employee not found");
         }
         return list.stream()
-                .map(doctor -> modelMapper.map(doctor, EmployeeDto.class))
+                .map(employee -> modelMapper.map(employee, EmployeeDto.class))
                 .collect(Collectors.toList());
     }
 
